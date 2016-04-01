@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" />
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            {# Brand & Toggle  #}
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" />
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        {# Brand & Toggle  #}
 
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                     <i class="fa fa-navicon"></i>
-                </button>
-                <a class="navbar-brand" href="#">FilRouge 2b3</a>
-            </div>
-            {# Links #}
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Accueil <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Series</a></li>
-                    <li><a href="#">Episodes</a></li>
-                </ul>
-                {# User Links #}
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <i class="fa fa-navicon"></i>
+            </button>
+            <a class="navbar-brand" href="#">FilRouge 2b3</a>
+        </div>
+        {# Links #}
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Accueil <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Series</a></li>
+                <li><a href="#">Episodes</a></li>
+            </ul>
+            {# User Links #}
+
+            <ul class="nav navbar-nav navbar-right">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                <ul class="nav navbar-nav navbar-right">
-
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{ app.user.username }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -48,18 +48,21 @@
                             {% endif %}
                         </ul>
                     </li>
-                    <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out text-danger"></i></a></li>
-                </ul>
+                    <li><a href="{{ path('fos_user_security_logout') }}">Sign Out <i class="fa fa-sign-out text-danger"></i></a></li>
+                {% else %}
+                    <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in text-success"></i> Sign In</a></li>
                 {% endif %}
-            </div>
+            </ul>
+
         </div>
-    </nav>
-    <body>
-    <div class="container">
-        {% block body %}{% endblock %}
     </div>
-        <script src="{{ asset('js/jquery-2.2.2.min.js') }}"></script>
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-        {% block javascripts %}{% endblock %}
-    </body>
+</nav>
+<body>
+<div class="container">
+    {% block body %}{% endblock %}
+</div>
+<script src="{{ asset('js/jquery-2.2.2.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+{% block javascripts %}{% endblock %}
+</body>
 </html>
