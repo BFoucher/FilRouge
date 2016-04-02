@@ -1,0 +1,44 @@
+{% extends ('::admin/layout.html.twig') %}
+
+{% block admin_content %}
+    <h3>Detail de l'utilisateur</h3>
+    <div class="row">
+        {% if not user.enabled %}
+            <p class="alert alert-danger text-danger text-center">
+                <strong><i class="fa fa-info"></i> Utilisteur Banni</strong>
+            </p>
+        {% endif %}
+        <div class="col-xs-6 col-sm-4 col-sm-offset-2">
+            <p><strong>Username :</strong></p>
+            <p><strong>Email :</strong></p>
+            <p><strong>Roles :</strong></p>
+        </div>
+        <div class="col-xs-6">
+            <p>{{ user.username }}</p>
+            <p>{{ user.email }}</p>
+            {% for role in user.roles %}
+                <p class="label label-primary big">{{ role }}</p>
+            {% endfor %}
+
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+            {{ form_errors(form) }}
+            {{ form_widget(form.roles, {'attr': {'class': 'form-control btn-group'}}) }}
+            {{ form_rest(form) }}
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 text-right">
+            {% if user.enabled %}
+                <a href="{{ path('admin_users_ban',{'user':user.id}) }}" class="btn btn-danger"><i class="fa fa-ban"></i> Bannir l'utilisateur</a>
+                {% else %}
+                <a href="{{ path('admin_users_ban',{'user':user.id}) }}" class="btn btn-success"><i class="fa fa-gavel"></i> Debannir l'utilisateur</a>
+            {% endif %}
+        </div>
+        <div class="col-xs-6">
+            <input type="submit" class="btn btn-warning" value="Edit">
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
