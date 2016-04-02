@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Form\AdminUserType;
 
 /**
  * Class DefaultController
@@ -33,8 +34,17 @@ class UserController extends Controller
      */
     public function editAction(Request $request,User $user)
     {
+        $form = $this->createForm('AppBundle\Form\AdminUserType', $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('admin_users_list');
+        }
         return $this->render('admin/user/edit.html.twig',[
-            'user' => $user
+            'user' => $user,
+            'form' => $form->createView()
         ]);
     }
 
@@ -52,8 +62,6 @@ class UserController extends Controller
         $em->persist($user);
         $em->flush();
 
-        return $this->render('admin/user/edit.html.twig',[
-            'user' => $user
-        ]);
+        return $this->redirectToRoute('admin_users_edit',['user'=>($user->getId())]);
     }
 }

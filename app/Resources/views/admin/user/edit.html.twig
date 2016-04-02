@@ -19,6 +19,13 @@
             {% for role in user.roles %}
                 <p class="label label-primary big">{{ role }}</p>
             {% endfor %}
+
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+            {{ form_errors(form) }}
+            {{ form_widget(form.roles, {'attr': {'class': 'form-control btn-group'}}) }}
+            {{ form_rest(form) }}
+
+
         </div>
     </div>
     <div class="row">
@@ -28,10 +35,10 @@
                 {% else %}
                 <a href="{{ path('admin_users_ban',{'user':user.id}) }}" class="btn btn-success"><i class="fa fa-gavel"></i> Debannir l'utilisateur</a>
             {% endif %}
-
         </div>
         <div class="col-xs-6">
-            <a href="#" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a>
+            <input type="submit" class="btn btn-warning" value="Edit">
         </div>
+        {{ form_end(form) }}
     </div>
 {% endblock %}
