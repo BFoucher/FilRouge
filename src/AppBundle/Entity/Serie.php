@@ -66,7 +66,7 @@ class Serie
     /**
     * @var string
     *
-    * @ORM\ManyToOne(targetEntity="Language",inversedBy="serie")
+    * @ORM\ManyToOne(targetEntity="Language")
     */
     private $language;
 

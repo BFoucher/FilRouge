@@ -58,7 +58,7 @@ class Episode
     /**
     * @var string
     *
-    * @ORM\ManyToOne(targetEntity="Language",inversedBy="episode")
+    * @ORM\ManyToOne(targetEntity="Language")
     */
     private $language;
 
