@@ -26,7 +26,7 @@ class SerieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $series = $em->getRepository('AppBundle:Serie')->findAll();
+        $series = $em->getRepository('AppBundle:Serie')->getAll();
 
         return $this->render('serie/index.html.twig', array(
             'series' => $series,
@@ -137,4 +137,5 @@ class SerieController extends Controller
             ->getForm()
         ;
     }
+
 }

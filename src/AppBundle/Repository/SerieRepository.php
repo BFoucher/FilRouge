@@ -20,4 +20,43 @@ class SerieRepository extends EntityRepository
 
         return $query->getSingleScalarResult();
     }
+
+	public function getAll(){
+      $query = $this->createQueryBuilder('serie')
+      		->select('serie')
+      		->orderBy('serie.name','ASC')
+      		->where('serie.validated= :is_validated' )
+      		->setParameter(':is_validated',true)
+            ->getQuery();
+
+        return $query->getResult();
+
+    }
+
+
+        public function getOne(){
+        $query = $this->createQueryBuilder('serie')
+            ->select('serie')
+            ->where('serie.id = :id')
+      		->andWhere('serie.validated= :is_validated')
+      		->setParameter('id', $serie->getId())
+      		->setParameter(':is_validated',true)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+
+        public function getLastSerie($nb = 5){
+        $query = $this->createQueryBuilder('serie')
+            ->select('serie')
+            ->orderBy('serie.id', 'DESC')
+            ->andWhere('serie.validated= :is_validated')
+      		->setParameter(':is_validated',true)
+            ->setMaxResults($nb)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+    git
 }

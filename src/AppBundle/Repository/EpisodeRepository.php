@@ -20,4 +20,43 @@ class EpisodeRepository extends EntityRepository
 
         return $query->getSingleScalarResult();
     }
+
+	 public function getAll(){
+        $query = $this->createQueryBuilder('episode')
+            ->select('episode')
+            ->orderBy('episode.name','ASC')
+            ->where('episode.validated=:is_validated')
+            ->setParameter(':is_validated',false)
+            ->getQuery();
+          
+
+        return $query->getResult();
+    }
+
+            public function getOne(){
+        $query = $this->createQueryBuilder('episode')
+            ->select('episode')
+            ->where('episode.id = :id')
+      		->andWhere('episode.validated= :is_validated')
+      		->setParameter('id', $episode->getId())
+      		->setParameter(':is_validated',true)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+
+        public function getLastepisode($nb = 5){
+        $query = $this->createQueryBuilder('episode')
+            ->select('episode')
+            ->orderBy('episode.id', 'DESC')
+            ->andWhere('episode.validated= :is_validated')
+      		->setParameter(':is_validated',true)
+            ->setMaxResults($nb)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+
 }

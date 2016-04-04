@@ -26,7 +26,7 @@ class EpisodeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $episodes = $em->getRepository('AppBundle:Episode')->findAll();
+        $episodes = $em->getRepository('AppBundle:Episode')->getAll();
 
         return $this->render('episode/index.html.twig', array(
             'episodes' => $episodes,
