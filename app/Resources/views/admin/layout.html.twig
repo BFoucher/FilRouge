@@ -2,13 +2,13 @@
 
 {% block body %}
     <div class="row">
-        <h1 class="text-center">Espace Admin</h1>
+        <h1 class="text-center">{% block admin_title %}Espace Admin{% endblock %}</h1>
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-3">
             <div class="list-group">
                 <a href="{{ path('admin_index') }}" class="list-group-item">Accueil</a>
-                <a href="#" class="list-group-item">Fiches à modérer <span class="label label-primary big pull-right">{{ validator.nbNotValidated() }}</span> </a>
+                <a href="{{ path('moderation_index') }}" class="list-group-item">Fiches à modérer <span class="label label-primary big pull-right">{{ validator.nbNotValidated() }}</span> </a>
                 <a href="{{ path('admin_users_list') }}" class="list-group-item">Utilisateurs</a>
                 <a href="#" class="list-group-item">Séries</a>
                 <a href="#" class="list-group-item">Episodes</a>

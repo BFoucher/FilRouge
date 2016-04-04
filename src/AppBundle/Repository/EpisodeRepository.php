@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class EpisodeRepository extends EntityRepository
 {
+    public function countNotValidated(){
+        $query = $this->createQueryBuilder('episode')
+            ->select('COUNT(episode)')
+            ->where('episode.validated = false')
+            ->getQuery();
+
+        return $query->getSingleScalarResult();
+    }
 }

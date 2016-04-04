@@ -35,7 +35,7 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if is_granted('ROLE_MODERATOR') %}
                     {% if validator.nbNotValidated() %}
-                        <li><a href="#"><span class="label label-primary big"><i class="fa fa-refresh"></i> {{ validator.nbNotValidated() }}</span></a></li>
+                        <li><a href="{{ path('moderation_index') }}"><span class="label label-primary big"><i class="fa fa-refresh"></i> {{ validator.nbNotValidated() }}</span></a></li>
                     {% endif %}
                 {% endif %}
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}

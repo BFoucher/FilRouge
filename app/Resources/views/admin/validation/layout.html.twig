@@ -1,0 +1,10 @@
+{% extends ('::admin/layout.html.twig') %}
+
+{% block admin_title %} Validation {% endblock %}
+
+{% block admin_content %}
+<div class="subtitles">En attente :
+    <span class="label label-primary"><strong>{{ validator.nbSerieNotValidated() }}</strong> Série(s)</span>
+    <span class="label label-primary"><strong>{{ validator.nbEpisodeNotValidated() }}</strong> Episode(s)</span>
+</div>
+{% endblock %}
