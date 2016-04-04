@@ -1,0 +1,18 @@
+{% extends ('admin/validation/layout.html.twig') %}
+
+{% block validation_content %}
+    <div class="col-xs-3">
+        <img src="{{ serie.picture[0].url }}" alt="{{ serie.picture[0].alt }}" width="100%">
+    </div>
+    <div class="col-xs-9">
+        <h3><strong>{{ serie.name }}</strong></h3>
+        <p><strong>Description :</strong> {{ serie.description }}</p>
+        <p><strong>TheTvDb :</strong> {% if serie.thTvdbID %}{{ serie.thTvDbID }}{% endif %}</p>
+        <p><strong>Langue :</strong> {{ serie.language.name }}</p>
+    </div>
+    <div class="col-xs-9">
+        <a href="{{ path('validation_item',{'type':'serie','id':serie.id,'validate':'no'})  }}" class="btn btn-danger btn-bg">Supprimer</a>
+        <a href="{{ path('validation_item',{'type':'serie','id':serie.id,'validate':'ok'})  }}" class="btn btn-success btn-bg">Accepter</a>
+    </div>
+
+{% endblock %}

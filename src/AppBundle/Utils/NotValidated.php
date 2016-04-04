@@ -18,7 +18,7 @@ class NotValidated
 
     public function nbNotValidated()
     {
-        return $this->nbSeries;
+        return $this->nbSeries+$this->nbEpisodes;
     }
 
     public function nbSerieNotValidated()
@@ -46,5 +46,13 @@ class NotValidated
         $notValidatedEpisode = $this->em->getRepository('AppBundle:Episode')->countNotValidated();
 
         return $notValidatedEpisode;
+    }
+    
+    public function getSerie(){
+        return $this->em->getRepository('AppBundle:Serie')->getLastSerie(1,false);
+    }
+
+    public function getEpisode(){
+        return $this->em->getRepository('AppBundle:Episode')->getLastepisode(1,false);
     }
 }

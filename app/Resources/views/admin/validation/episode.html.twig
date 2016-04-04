@@ -1,0 +1,21 @@
+{% extends ('admin/validation/layout.html.twig') %}
+
+{% block validation_content %}
+    <div class="col-xs-3">
+        <p class="text-center">{{ episode.serie.name }}</p>
+        <img src="{{ episode.serie.picture[0].url }}" alt="{{ episode.serie.picture[0].alt }}" width="100%">
+    </div>
+    <div class="col-xs-9">
+        <h3><strong>{{ episode.name }}</strong></h3>
+        <p><strong>Description :</strong> {{ episode.description }}</p>
+        <p><strong>Saison :</strong> {{ episode.saison }}</p>
+        <p><strong>Episode Numéro :</strong> {{ episode.episodeNumber }}</p>
+
+        <p><strong>Langue :</strong> {{ episode.language.name }}</p>
+    </div>
+    <div class="col-xs-9">
+        <a href="{{ path('validation_item',{'type':'episode','id':episode.id,'validate':'no'})  }}" class="btn btn-danger btn-bg">Supprimer</a>
+        <a href="{{ path('validation_item',{'type':'episode','id':episode.id,'validate':'ok'})  }}" class="btn btn-success btn-bg">Accepter</a>
+    </div>
+
+{% endblock %}

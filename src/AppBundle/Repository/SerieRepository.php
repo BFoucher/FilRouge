@@ -47,12 +47,12 @@ class SerieRepository extends EntityRepository
     }
 
 
-        public function getLastSerie($nb = 5){
+        public function getLastSerie($nb = 5,$validated = true){
         $query = $this->createQueryBuilder('serie')
             ->select('serie')
             ->orderBy('serie.id', 'DESC')
             ->andWhere('serie.validated= :is_validated')
-      		->setParameter(':is_validated',true)
+      		->setParameter(':is_validated',$validated)
             ->setMaxResults($nb)
             ->getQuery();
 

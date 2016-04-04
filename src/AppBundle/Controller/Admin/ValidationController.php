@@ -16,11 +16,57 @@ use AppBundle\Form\AdminUserType;
 class ValidationController extends Controller
 {
     /**
-     * @Route("/", name="moderation_index")
+     * @Route("/", name="validation")
      */
-    public function indexAction(Request $request)
+    public function validateAction(Request $request)
     {
+        $validator = $this->get('app.validator');
 
-        return $this->render('admin/validation/layout.html.twig');
+        if($validator->nbSerieNotValidated()){
+            $serie = $validator->getSerie();
+            return $this->render('admin/validation/serie.html.twig',[
+                'serie'=>$serie[0]
+            ]);
+
+        }elseif ($validator->nbEpisodeNotValidated()){
+            $episode = $validator->getEpisode();
+            return $this->render('admin/validation/episode.html.twig',[
+                'episode' => $episode[0]
+            ]);
+
+        }else{
+
+            return $this->render('admin/validation/null.html.twig');
+        }
+    }
+
+    /**
+     * @Route("/validate/{type}/{id}/{validate}", name="validation_item")
+     */
+    public function validateSuccessAction(Request $request,$type,$id,$validate)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if ($type=== 'serie'){
+            $serie = $em->getRepository('AppBundle:Serie')->find($id);
+            if ($validate==='ok'){
+                $serie->setValidated(true);
+                $em->persist($serie);
+            }else{
+                $em->remove($serie);
+            }
+            $em->flush();
+
+        }elseif ($type=== 'episode'){
+            $episode = $em->getRepository('AppBundle:Episode')->find($id);
+            if ($validate==='ok'){
+                $episode->setValidated(true);
+                $em->persist($episode);
+            }else{
+                $em->remove($episode);
+            }
+            $em->flush();
+
+        }
+        return $this->redirectToRoute('validation');
     }
 }
