@@ -66,7 +66,7 @@ class Serie
     /**
     * @var string
     *
-    * @ORM\ManyToOne(targetEntity="Language",inversedBy="serie")
+    * @ORM\ManyToOne(targetEntity="Language")
     */
     private $language;
 
@@ -321,4 +321,9 @@ class Serie
     {
         return $this->author;
     }
+
+        public function __toString()
+{
+    return $this->getName();
+}
 }

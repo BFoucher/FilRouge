@@ -38,7 +38,7 @@ class Serie
     /**
      * @var int
      *
-     * @ORM\Column(name="thTvdbID", type="integer")
+     * @ORM\Column(name="thTvdbID", type="integer", nullable = true)
      */
     private $thTvdbID;
 
@@ -52,7 +52,7 @@ class Serie
     /**
     * @var string
     *
-    * @ORM\OneToMany(targetEntity= "Episode", mappedBy= "serie", cascade={"remove"})
+    * @ORM\OneToMany(targetEntity= "Episode", mappedBy= "serie", cascade={"remove"}, nullable = true)
     */
     private $episodes;
 
@@ -151,7 +151,7 @@ class Serie
      *
      * @return integer 
      */
-    public function getThTvdbID()
+    public function setThTvdbID()
     {
         return $this->thTvdbID;
     }
@@ -223,5 +223,29 @@ class Serie
     public function getLanguage()
     {
         return $this->language;
+    }
+
+
+    /**
+     * Set picture
+     *
+     * @param string $picture
+     * @return string
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string 
+     */
+    public function getPicture()
+    {
+        return $this->picture;
     }
 }

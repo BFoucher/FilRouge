@@ -58,7 +58,7 @@ class Episode
     /**
     * @var string
     *
-    * @ORM\ManyToOne(targetEntity="Language",inversedBy="episode")
+    * @ORM\ManyToOne(targetEntity="Language")
     */
     private $language;
 
@@ -240,4 +240,9 @@ class Episode
     {
         return $this->author;
     }
+
+        public function __toString()
+{
+    return $this->getName();
+}
 }

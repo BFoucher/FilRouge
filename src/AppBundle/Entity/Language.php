@@ -92,5 +92,14 @@ class Language
         return $this->sName;
     }
 
+<<<<<<< HEAD
+=======
+    public function __toString()
+{
+    return $this->getName();
+}
+>>>>>>> 07e5ea18527176765bbab6d7313ce01befc52fc7
 
 }
+
+
