@@ -1,5 +1,15 @@
 {% extends ('::admin/layout.html.twig') %}
 
 {% block admin_content %}
-    <p>Bienvenue sur l'index de l'espace admin</p>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            {% include ('::admin/default/last_users_block.html.twig') %}
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            {% include ('::admin/default/last_series_block.html.twig') %}
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            {% include ('::admin/default/last_episodes_block.html.twig') %}
+        </div>
+    </div>
 {% endblock %}
