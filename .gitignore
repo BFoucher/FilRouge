@@ -12,6 +12,9 @@
 !app/logs/.gitkeep
 /app/phpunit.xml
 
+*php~*
+
+
 
 # intelJ
 .idea/*
