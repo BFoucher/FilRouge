@@ -12,4 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class EpisodeRepository extends EntityRepository
 {
+	 public function getAll(){
+        $query = $this->createQueryBuilder('episode')
+            ->select('episode')
+            ->orderBy('episode.name','ASC')
+            ->where('episode.validated=:is_validated')
+            ->setParameter(':is_validated',false)
+            ->getQuery();
+          
+
+        return $query->getResult();
+    }
 }
