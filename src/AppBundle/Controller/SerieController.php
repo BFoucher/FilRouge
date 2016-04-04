@@ -137,4 +137,7 @@ class SerieController extends Controller
             ->getForm()
         ;
     }
+
+
+    
 }
