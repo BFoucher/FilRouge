@@ -39,6 +39,13 @@ class LoadUserData implements FixtureInterface
                 $french = new Language();
                 $french->setName('français');
                 $french->setsName('fr');
+                $manager->persist($french);
+
+                $english = new Language();
+                $english->setName('english');
+                $english->setsName('en');
+                $manager->persist($english);
+
 
                 $serie = new Serie();
                 $serie->setName('Girls');
@@ -66,7 +73,6 @@ class LoadUserData implements FixtureInterface
                 $episode->setAuthor($user);
 
                 $manager->persist($episode);
-                $manager->persist($french);
 
 
                 $manager->flush();
