@@ -43,6 +43,13 @@ class Episode
     private $saison;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="episode_number", type="integer")
+     */
+    private $episodeNumber;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="validated", type="boolean")
@@ -56,24 +63,24 @@ class Episode
     private $serie;
 
     /**
-    * @var string
-    *
-    * @ORM\ManyToOne(targetEntity="Language")
-    */
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Language")
+     */
     private $language;
 
 
     /**
-    * @var string
-    *
-    * @ORM\ManyToOne(targetEntity="User",inversedBy="episode")
-    */
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="User",inversedBy="episode")
+     */
     private $author;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -96,7 +103,7 @@ class Episode
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -119,7 +126,7 @@ class Episode
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -142,7 +149,7 @@ class Episode
     /**
      * Get saison
      *
-     * @return integer 
+     * @return integer
      */
     public function getSaison()
     {
@@ -165,20 +172,20 @@ class Episode
     /**
      * Get validated
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getValidated()
     {
         return $this->validated;
     }
 
-        /**
+    /**
      * Set serie
      *
      * @param string $serie
      * @return Episode
      */
-    public function setserie($serie)
+    public function setSerie($serie)
     {
         $this->serie = $serie;
 
@@ -186,11 +193,11 @@ class Episode
     }
 
     /**
-     * Get serie
+     * Get Serie
      *
-     * @return string 
+     * @return string
      */
-    public function getserie()
+    public function getSerie()
     {
         return $this->serie;
     }
@@ -211,7 +218,7 @@ class Episode
     /**
      * Get language
      *
-     * @return string 
+     * @return string
      */
     public function getLanguage()
     {
@@ -234,15 +241,38 @@ class Episode
     /**
      * Get author
      *
-     * @return \AppBundle\Entity\User 
+     * @return \AppBundle\Entity\User
      */
     public function getAuthor()
     {
         return $this->author;
     }
+    
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
-        public function __toString()
-{
-    return $this->getName();
-}
+    /**
+     * Set episodeNumber
+     *
+     * @param integer $episodeNumber
+     * @return Episode
+     */
+    public function setEpisodeNumber($episodeNumber)
+    {
+        $this->episodeNumber = $episodeNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get episodeNumber
+     *
+     * @return integer
+     */
+    public function getEpisodeNumber()
+    {
+        return $this->episodeNumber;
+    }
 }
