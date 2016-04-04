@@ -240,4 +240,9 @@ class Episode
     {
         return $this->author;
     }
+
+        public function __toString()
+{
+    return $this->getName();
+}
 }

@@ -91,4 +91,12 @@ class Language
     {
         return $this->sName;
     }
+
+    public function __toString()
+{
+    return $this->getName();
 }
+
+}
+
+

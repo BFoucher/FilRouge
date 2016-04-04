@@ -45,6 +45,9 @@ class LoadSerieData implements FixtureInterface
     {   $french = new Language();
         $french->setName('français');
         $french->setsName('fr');
+        $engilsh = new Language();
+        $engilsh->setName('engilsh');
+        $engilsh->setsName('en');
         $serie = new Serie();
         $serie->setName('Girls');
         $serie->setDescription('Girls est une série qui suit la vie d\'un groupe 

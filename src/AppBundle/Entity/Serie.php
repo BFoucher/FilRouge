@@ -321,4 +321,9 @@ class Serie
     {
         return $this->author;
     }
+
+        public function __toString()
+{
+    return $this->getName();
+}
 }
