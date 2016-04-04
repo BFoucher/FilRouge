@@ -1,0 +1,10 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Derniers utilisateurs</h3>
+    </div>
+    <ul class="panel-body list-group">
+        {% for user in users %}
+            <a href="{{ path('admin_users_edit',{'user':user.id}) }}" class="list-group-item">{{ user.username }}</a>
+        {% endfor %}
+    </ul>
+</div>

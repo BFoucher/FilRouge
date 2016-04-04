@@ -19,6 +19,14 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('admin/default/index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('AppBundle:User')->getLastUsers(3);
+        $series = $em->getRepository('AppBundle:Serie')->findAll(); //TODO: create getLastSeries() query
+        $episodes = $em->getRepository('AppBundle:Episode')->findAll(); //TODO: create getLastEpisodes() query
+        return $this->render('admin/default/index.html.twig',[
+            'users' => $users,
+            'series' => $series,
+            'episodes' => $episodes
+        ]);
     }
 }
