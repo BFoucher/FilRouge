@@ -5,6 +5,9 @@ namespace AppBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Episode;
+use AppBundle\Entity\Serie;
+use AppBundle\Entity\Language;
 
 class LoadUserData implements FixtureInterface
 {
@@ -33,6 +36,39 @@ class LoadUserData implements FixtureInterface
         $user->setEnabled(true);
         $manager->persist($user);
 
+        $french = new Language();
+        $french->setName('français');
+        $french->setsName('fr'); 
+
+        $serie = new Serie();
+        $serie->setName('Girls');
+        $serie->setDescription('Girls est une série qui suit la vie d\'un groupe 
+             d\'amies ayant la vingtaine et qui vivent leur vie à New York. 
+             Les principaux aspects du personnage principal ont été inspirés 
+             par certaines expériences de Lena Dunham, une des actrices principales 
+             de la série.');
+
+        $serie->setEpisode('null');
+        $serie->setLanguage($french);
+        $serie->setThTvdbID(0);
+        $serie->setValidated(true);
+         //$serie->setPicture('https://commons.wikimedia.org/w/index.php?title=File:Girls-logo.svg&lang=fr&uselang=fr');
+         $manager->persist($serie);
+
+        $episode = new Episode();
+        $episode->setName('Les aventures de José');
+        $episode->setDescription('José est poursuivit par Claudette nue avec son fusil afin de récupérer son bien à savoir : son dentier ');
+        $episode->setSaison('saison 1');
+        $episode->setValidated(true);
+        $episode->setLanguage($french);
+        $episode->setAuthor($user);
+
+        $manager->persist($episode);
+        $manager->persist($french);
+
+    
         $manager->flush();
     }
-}
+
+} 
+
