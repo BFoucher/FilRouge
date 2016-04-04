@@ -34,12 +34,12 @@ class SerieRepository extends EntityRepository
     }
 
 
-        public function getOne(){
+        public function getOne($serieId){
         $query = $this->createQueryBuilder('serie')
             ->select('serie')
             ->where('serie.id = :id')
       		->andWhere('serie.validated= :is_validated')
-      		->setParameter('id', $serie->getId())
+      		->setParameter('id', $serieId)
       		->setParameter(':is_validated',true)
             ->getQuery();
 
@@ -58,5 +58,4 @@ class SerieRepository extends EntityRepository
 
         return $query->getResult();
     }
-    git
 }

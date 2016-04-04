@@ -33,12 +33,12 @@ class EpisodeRepository extends EntityRepository
         return $query->getResult();
     }
 
-            public function getOne(){
+            public function getOne($episodeId){
         $query = $this->createQueryBuilder('episode')
             ->select('episode')
             ->where('episode.id = :id')
       		->andWhere('episode.validated= :is_validated')
-      		->setParameter('id', $episode->getId())
+      		->setParameter('id', $episodeId)
       		->setParameter(':is_validated',true)
             ->getQuery();
 
