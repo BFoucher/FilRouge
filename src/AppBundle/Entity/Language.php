@@ -39,7 +39,7 @@ class Language
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -62,7 +62,7 @@ class Language
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -85,21 +85,17 @@ class Language
     /**
      * Get sName
      *
-     * @return string 
+     * @return string
      */
     public function getSName()
     {
         return $this->sName;
     }
 
-<<<<<<< HEAD
-=======
     public function __toString()
-{
-    return $this->getName();
-}
->>>>>>> 07e5ea18527176765bbab6d7313ce01befc52fc7
-
+    {
+        return $this->getName();
+    }
 }
 
 
