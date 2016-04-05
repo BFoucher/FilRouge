@@ -151,4 +151,9 @@ class Picture
     {
         return $this->serie;
     }
+
+    public  function  __toString()
+    {
+        return $this->url;
+    }
 }

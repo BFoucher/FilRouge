@@ -10,3 +10,11 @@ services:
     app.validator:
         class: AppBundle\Utils\NotValidated
         arguments: [@doctrine.orm.entity_manager]
+    app.form.registration:
+            class: AppBundle\Form\RegistrationType
+            tags:
+                - { name: form.type, alias: app_user_registration }
+    app.form.profile:
+                class: AppBundle\Form\ProfileType
+                tags:
+                    - { name: form.type, alias: app_user_profile }
