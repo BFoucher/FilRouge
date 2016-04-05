@@ -2,29 +2,53 @@
 <div class="row">
     <form action="{{ path("fos_user_registration_register") }}" method="post" class="fos_user_registration_register">
         <div class="col-sm-9 col-sm-offset-3">
-            <h1>Crée un compte</h1>
+            <h1>Créer un compte</h1>
         </div>
-        <div class="col-sm-9 col-sm-offset-3">
-            {{ form_label(form.firstName, 'Prénom', {'label_attr': {'class': ''}}) }}
-            {{ form_widget(form.lastName) }}
+        <div class="col-sm-6 col-sm-offset-3">
+            {{ form_label(form.lastName) }}
+            {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
         </div>
-        <div class="col-sm-9 col-sm-offset-3">
-            {{ form_widget(form.firstName) }}
+        <div class="col-sm-6 col-sm-offset-3">
+            {{ form_label(form.firstName) }}
+            {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
         </div>
-        <div class="col-sm-9 col-sm-offset-3">
-            {{ form_widget(form.username) }}
+        <div class="col-sm-6 col-sm-offset-3">
+            {{ form_label(form.username) }}
+            <div class="input-group">
+                <span class="input-group-addon" id="username"><i class="fa fa-user"></i></span>
+                {{ form_widget(form.username, {'attr': {'class': 'form-control', 'aria-describedby':'username'}}) }}
+            </div>
         </div>
-        <div class="col-sm-9 col-sm-offset-3">
-            {{ form_widget(form.plainPassword) }}
+        <div class="col-sm-6 col-sm-offset-3">
+            {{ form_label(form.plainPassword.first) }}
+            <div class="input-group">
+                <span class="input-group-addon" id="password"><i class="fa fa-key"></i></span>
+                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'aria-describedby':'password'}}) }}
+            </div>
         </div>
-        <div class="col-sm-9 col-sm-offset-3">
-            {{ form_widget(form.email) }}
+        <div class="col-sm-6 col-sm-offset-3">
+            {{ form_label(form.plainPassword.second) }}
+            <div class="input-group">
+                <span class="input-group-addon" id="password2"><i class="fa fa-key"></i></span>
+                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'aria-describedby':'password2'}}) }}
+            </div>
         </div>
-        <div class="col-sm-9 col-sm-offset-3">
-            {{ form_widget(form.birth) }}
+        <div class="col-sm-6 col-sm-offset-3">
+            {{ form_label(form.email) }}
+            <div class="input-group">
+                <span class="input-group-addon" id="email"><i class="fa fa-at"></i></span>
+                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'aria-describedby':'email'}}) }}
+            </div>
+        </div>
+        <div class="col-sm-6 col-sm-offset-3">
+            {{ form_label(form.birth) }}
+            <div class="input-group">
+                <span class="input-group-addon" id="birth"><i class="fa fa-birthday-cake"></i></span>
+                {{ form_widget(form.birth, {'attr': {'class': 'form-control', 'aria-describedby':'birth'}}) }}
+            </div>
         </div>
             {{ form_widget(form) }}
-        <div class="col-sm-9 col-sm-offset-3">
+        <div class="col-sm-6 col-sm-offset-3 text-right">
             <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-primary" />
         </div>
         {{ form_end(form) }}

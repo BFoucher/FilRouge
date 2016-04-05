@@ -2,6 +2,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class RegistrationType extends AbstractType
@@ -10,7 +11,10 @@ class RegistrationType extends AbstractType
     {
         $builder->add('firstName')
             ->add('lastName')
-            ->add('birth')
+            ->add('birth', DateType::class, array(
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+            ));
            // ->add('avatar')
         ;
     }

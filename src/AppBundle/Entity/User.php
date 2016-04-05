@@ -66,6 +66,7 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        $this->setBirth(new \DateTime());
     }
 
             /**
@@ -251,6 +252,29 @@ class User extends BaseUser
      */
     public function getAvatar()
     {
+        //TODO: remove when upload avatar work
+        if ($this->avatar === null){
+            return 'imgs/default_avatar.png';
+        }
         return $this->avatar;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName(){
+        return $this->getFirstName().' '.$this->getLastName();
+    }
+
+    /**
+     * Get age
+     *
+     * @return int
+     */
+    public function getAge(){
+        $diff = $this->birth->diff(new \DateTime());
+        return $diff->format('%y');
     }
 }

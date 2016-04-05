@@ -15,7 +15,10 @@ class LoadUserData implements FixtureInterface
         public function load(ObjectManager $manager)
         {
                 $userAdmin = new User();
+                $userAdmin->setFirstName('John');
+                $userAdmin->setLastName('Kevin');
                 $userAdmin->setUsername('admin');
+                $userAdmin->setBirth(new \DateTime());
                 $userAdmin->setPlainPassword('test');
                 $userAdmin->setEmail('admin@domain.net');
                 $userAdmin->setEnabled(true);
@@ -23,6 +26,9 @@ class LoadUserData implements FixtureInterface
                 $manager->persist($userAdmin);
 
                 $userModerator = new User();
+                $userModerator->setFirstName('Samanta');
+                $userModerator->setLastName('Durand');
+                $userModerator->setBirth(new \DateTime());
                 $userModerator->setUsername('moderator');
                 $userModerator->setPlainPassword('test');
                 $userModerator->setRoles(array('ROLE_MODERATOR'));
@@ -32,6 +38,9 @@ class LoadUserData implements FixtureInterface
 
                 $user = new User();
                 $user->setUsername('user');
+                $user->setFirstName('Gabriel');
+                $user->setLastName('Block');
+                $user->setBirth(new \DateTime());
                 $user->setPlainPassword('test');
                 $user->setEmail('user@domain.net');
                 $user->setEnabled(true);
