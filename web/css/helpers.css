@@ -9,3 +9,11 @@
 .biggest{
     font-size: 1.8em;
 }
+
+.text-small{
+    font-size: 0.8em;
+}
+
+.text-smaller{
+    font-size: 0.3em;
+}

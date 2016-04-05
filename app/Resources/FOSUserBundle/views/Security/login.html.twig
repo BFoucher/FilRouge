@@ -4,35 +4,50 @@
 
 {% block fos_user_content %}
     <div class="row">
-        <form action="{{ path("fos_user_security_check") }}" method="post" class="form-horizontal">
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+            <div class="col-sm-4 col-sm-offset-3">
+                <p class="bigger">Pas encore membre ?</p>
+            </div>
+            <div class="col-sm-2 text-right">
+                <a href="{{ path('fos_user_registration_register') }}" class="btn btn-info" >Create Account</a>
+            </div>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-            <div class="col-sm-6 col-sm-offset-2">
+            <div class="col-sm-6 col-sm-offset-3">
                 {% if error %}
                     <div class="alert alert-warning text-warning">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
             </div>
-            <div class="col-sm-6 col-sm-offset-2">
+            <div class="col-sm-6 col-sm-offset-3">
                 <label for="username">{{ 'security.login.username'|trans }}</label>
-                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control" />
-            </div>
-            <div class="col-sm-6 col-sm-offset-2">
-                <label for="password" class="control-label">{{ 'security.login.password'|trans }}</label>
-                <input type="password" id="password" name="_password" required="required" class="form-control" />
-            </div>
-            <div class="col-sm-6 col-sm-offset-2">
-                <div class="checkbox">
-                    <label for="remember_me">
-                        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-                         {{ 'security.login.remember_me'|trans }}
-                    </label>
+                <div class="input-group">
+                    <span class="input-group-addon" id="username"><i class="fa fa-user"></i></span>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control" aria-describedby="username" placeholder="{{ 'security.login.username'|trans }}" />
                 </div>
             </div>
-            <div class="col-sm-6 col-sm-offset-2">
-                <a href="{{ path('fos_user_registration_register') }}" class="btn btn-info" >Create Account</a>
-                <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-primary"/>
-
+            <div class="col-sm-6 col-sm-offset-3">
+                <label for="password" class="control-label">{{ 'security.login.password'|trans }}</label>
+                <div class="input-group">
+                    <span class="input-group-addon" id="password"><i class="fa fa-key"></i></span>
+                    <input type="password" id="password" name="_password" required="required" class="form-control" aria-describedby="password" placeholder="{{ 'security.login.password'|trans }}" />
+                </div>
             </div>
-
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="btn-group" data-toggle="buttons">
+                    <label for="remember_me" class="btn btn-default" style="margin-bottom: 5px;margin-top: 5px">
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on" autocomplete="off"/>
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>
+                </div>
+                <label>
+                    {{ 'security.login.remember_me'|trans }}
+                </label>
+            </div>
+            <div class="col-sm-6 col-sm-offset-3 text-right">
+                <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-primary"/>
+            </div>
         </form>
+        <div class="col-sm-6 col-sm-offset-3">
+            <p class="text-muted"><a href="#">Mot de passe oublié?</a></p>
+        </div>
     </div>
 {% endblock fos_user_content %}
