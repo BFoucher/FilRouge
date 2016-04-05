@@ -1,44 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Serie</h1>
-
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ serie.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ serie.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ serie.description }}</td>
-            </tr>
-            <tr>
-                <th>Thtvdbid</th>
-                <td>{{ serie.thTvdbID }}</td>
-            </tr>
-            <tr>
-                <th>Validated</th>
-                <td>{% if serie.validated %}Yes{% else %}No{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('serie_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('serie_edit', { 'id': serie.id }) }}">Edit</a>
-        </li>
-        <li>
+    <div class="col-xs-12">
+        <a href="{{ path('serie_index') }}" class="btn btn-primary btn-lg">Back to the list</a>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+        <div class="thumbnail">
+            <img src="{{ serie.picture[0].url }}" alt="{{ serie.picture[0].alt }}" />
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-7">
+        <p class="text-center block biggest"><strong>{{ serie.name }}</strong></p>
+    </div>
+    <div class="col-xs-12 col-sm-2 ">
+        <div class="block badger-right badger-inverse box-primary text-center" data-badger="Language" >
+            <span class="bigger"> {{ serie.language.sName }}</span>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+        <div class="block badger-left badger-inverse" data-badger="Description">
+            <p class="description">{{ serie.description }}</p>
+        </div>
+    </div>
+    {% if is_granted('ROLE_MODERATOR') %}
+        <div class="col-xs-6 col-sm-3">
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <input type="submit" value="Delete" class="btn btn-danger btn">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        </div>
+    {% endif %}
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <div class="col-xs-6 col-sm-3 pull-right text-right">
+            <a href="{{ path('serie_edit', { 'id': serie.id }) }}" class="box btn btn-warning"><i class="fa fa-pencil"></i> Edit</a>
+            <button class="btn btn-primary"><i class="fa fa-eye"></i> Follow </button>
+        </div>
+    {% endif %}
+
+    <div class="col-xs-12">
+        <div class="block badger-right badger-info" data-badger="Critiques">
+            bientôt bientôt ...
+        </div>
+    </div>
 {% endblock %}

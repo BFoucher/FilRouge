@@ -2,44 +2,17 @@
 
 {% block body %}
     <h1>Serie list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Thtvdbid</th>
-                <th>Validated</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <p><a href="{{ path('serie_new') }}" class="btn btn-primary btn-bg">Create a new entry</a></p>
+    <div class="row">
         {% for serie in series %}
-            <tr>
-                <td><a href="{{ path('serie_show', { 'id': serie.id }) }}">{{ serie.id }}</a></td>
-                <td>{{ serie.name }}</td>
-                <td>{{ serie.description }}</td>
-                <td>{{ serie.thTvdbID }}</td>
-                <td>{% if serie.validated %}Yes{% else %}No{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('serie_show', { 'id': serie.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('serie_edit', { 'id': serie.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+            <div class="colx-xs-6 col-sm-3 ">
+                <figure class="thumbnail">
+                    <img src="{{ serie.picture[0].url }}" alt="{{ serie.picture[0].alt }}" width="80%" class="img-responsive">
+                    <figcaption class="text-center bigger caption"><a href="{{ path('serie_show', { 'id': serie.id }) }}">{{ serie.name }}</figcaption>
+                </figure>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('serie_new') }}">Create a new entry</a>
-        </li>
-    </ul>
+    </div>
 {% endblock %}
+
+

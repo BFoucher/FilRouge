@@ -62,7 +62,7 @@ class LoadUserData implements FixtureInterface
                 $serie->setAuthor($userModerator);
                 $serie->setValidated(true);
                 $seriePicture = new Picture();
-                $seriePicture->setUrl('https://commons.wikimedia.org/w/index.php?title=File:Girls-logo.svg&lang=fr&uselang=fr');
+                $seriePicture->setUrl('http://www.cinemablend.com/images/sections/40691/_1332368316.jpg');
                 $seriePicture->setAlt('Affiche');
                 $seriePicture->setValidated(true);
                 $seriePicture->setSerie($serie);
