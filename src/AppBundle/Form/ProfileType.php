@@ -2,6 +2,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class ProfileType extends AbstractType
@@ -11,7 +12,11 @@ class ProfileType extends AbstractType
         $builder//->add('firstName')
             //->add('lastName')
             //->add('birth', 'date')
-             ->add('avatar')
+            ->add('avatar')
+            ->add('birth', DateType::class, array(
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+            ))
             ->remove('username')
         ;
     }

@@ -1,0 +1,58 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="row">
+    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1>Edit Profile</h1>
+    </div>
+    <div class="col-xs-12 col-sm-3 col-sm-offset-3">
+        <div class="divider">
+            <p class="biggest text-primary"><strong>{{ app.user.username }}</strong></p>
+            <p class="">{{ app.user.name }}</p>
+        </div>
+        <div class="divider">
+            {{ form_label(form.email) }}
+            <p class="text-danger">{{ form_errors(form.email) }}</p>
+            <div class="input-group">
+                <span class="input-group-addon" id="email"><i class="fa fa-at"></i></span>
+                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'aria-describedby':'email'}}) }}
+            </div>
+        </div>
+        <div class="">
+            {{ form_label(form.birth) }}
+            <div class="input-group">
+                <span class="input-group-addon" id="birth"><i class="fa fa-birthday-cake"></i></span>
+                {{ form_widget(form.birth, {'attr': {'class': 'form-control', 'aria-describedby':'birth'}}) }}
+            </div>
+        </div>
+        <div class="">
+            {{ form_label(form.current_password) }}
+            <p class="text-danger">{{ form_errors(form.current_password) }}</p>
+            <div class="input-group">
+                <span class="input-group-addon" id="password"><i class="fa fa-key"></i></span>
+                {{ form_widget(form.current_password, {'attr': {'class': 'form-control', 'aria-describedby':'password'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+        <div>
+            <div  class="text-center">
+                <img src="{{ asset(app.user.avatar) }}"  class="img-responsive avatar" style="max-height: 300px">
+            </div>
+            {{ form_label(form.avatar) }}
+            <div class="input-group">
+                <span class="input-group-addon" id="avatar"><i class="fa fa-picture-o"></i></span>
+                {{ form_widget(form.avatar, {'attr': {'class': 'form-control', 'aria-describedby':'password'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-sm-offset-3">
+        {{ form_widget(form) }}
+    </div>
+    <div class="col-sm-3 col-sm-offset-3 ">
+        <a href="{{ path('user_profile',{'user':app.user.id}) }}" class="btn btn-danger"><i class="fa fa-undo"></i> Annuler</a>
+    </div>
+    <div class="col-sm-3 text-right">
+        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" class="btn btn-success" />
+    </div>
+{{ form_end(form) }}
+    </div>
