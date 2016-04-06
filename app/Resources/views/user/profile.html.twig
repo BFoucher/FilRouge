@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        {% if app.user.id == user.id %}
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and app.user.id == user.id %}
             <div class="col-md-2 col-lg col-lg-3">
                 <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-info"><i class="fa fa-pencil"> Edit</i></a>
             </div>
