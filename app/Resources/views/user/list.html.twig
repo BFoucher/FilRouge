@@ -1,0 +1,111 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+<div class="container dynamicTile">
+<div class="row ">
+{% for user in users %}
+<a href="{{ path('user_profile',{'user':user.id}) }}">
+    <div class="col-sm-2 col-xs-4">
+    	<div id="tile{{ loop.index }}" class="tile">
+
+         <div class="carousel slide" data-ride="carousel">
+         <div class="username">{{ user.username }}</div>
+          <div class="carousel-inner">
+            <div class="item active overlay">
+               <img src="{{ asset(user.avatar) }}" alt="{{ user.username }}" />
+            </div>
+            <div class="item item-text overlay">
+               <h3 class="tilecaption biggest text-center"><strong>72</strong></h3>
+                <p class="text-center">Critiques</p>
+            </div>
+            <div class="item item-text overlay">
+               <h3 class="tilecaption biggest text-center"><strong>384</strong></h3>
+                <p class="text-center">Episodes Vus</p>
+            </div>
+            <div class="item item-text overlay">
+               <h3 class="tilecaption biggest text-center"><strong>384</strong></h3>
+                <p class="text-center">Likes</p>
+            </div>
+          </div>
+        </div>
+
+    	</div>
+	</div>
+	</a>
+{% endfor %}
+{% endblock %}
+
+
+{% block stylesheets %}
+    <style>
+        .dynamicTile{
+            padding:5px;
+        }
+        .tile{
+            margin: 5px;
+            z-index: 1;
+        }
+        .item-text{
+            padding-top: 30px;
+            font-weight: 900;
+        }
+        .overlay{
+            position:absolute;
+            background-color: #f6f6f6;
+            opacity: 0.7;
+        }
+        @media (max-device-width: 640px){
+            .item-text{
+                padding-top: 0px;
+                font-weight: 400;
+                font-size: 0.8em;
+            }
+        }
+        {%   for user in users %}
+            #tile{{ loop.index }}{
+                background-image: url('{{ asset(user.avatar) }}');
+                background-size: cover;
+            }
+        {%  endfor %}
+        .username{
+            position:absolute;
+            bottom: 0px;
+            text-align: center;
+            font-size: 1.3em;
+            width: 100%;
+            background-color: #222222;
+            color:#f6f6f6;
+            z-index: 2;
+            opacity: 0.5;
+        }
+    </style>
+{% endblock %}
+
+
+
+{% block javascripts %}
+    <script>
+        $( document ).ready(function() {
+            $(".tile").height($("#tile1").width());
+            $(".carousel").height($("#tile1").width());
+            $(".item").height($("#tile1").width());
+
+            $(window).resize(function() {
+                if(this.resizeTO) clearTimeout(this.resizeTO);
+                this.resizeTO = setTimeout(function() {
+                    $(this).trigger('resizeEnd');
+                }, 10);
+            });
+
+            $(window).bind('resizeEnd', function() {
+                $(".tile").height($("#tile1").width());
+                $(".carousel").height($("#tile1").width());
+                $(".item").height($("#tile1").width());
+            });
+
+        });
+
+
+    </script>
+{% endblock %}

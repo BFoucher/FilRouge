@@ -15,6 +15,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class UserController extends Controller
 {
     /**
+     * List User.
+     *
+     * @Route("/", name="user_list")
+     * @Method("GET")
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('AppBundle:User')->findAll();
+        return $this->render('user/list.html.twig', array(
+            'users' => $users,
+        ));
+    }
+
+    /**
      * Show Profile.
      *
      * @Route("/{user}", name="user_profile")
