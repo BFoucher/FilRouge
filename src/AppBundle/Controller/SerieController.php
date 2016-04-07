@@ -9,6 +9,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Serie;
 use AppBundle\Form\SerieType;
 
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+
+
 /**
  * Serie controller.
  *
@@ -24,6 +30,17 @@ class SerieController extends Controller
      */
     public function indexAction()
     {
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $api = $this->container->get('thetvdb');
+        $search = $api->searchTvShow('girls');
+
+        $jsonContent = $serializer->serialize($search, 'json');
+        dump($jsonContent);
+
+
         $em = $this->getDoctrine()->getManager();
 
         $series = $em->getRepository('AppBundle:Serie')->getAll();
