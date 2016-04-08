@@ -36,12 +36,53 @@ class TvdbController extends Controller
         $serializer = new Serializer($normalizers, $encoders);
 
         $api = $this->container->get('thetvdb');
-        $search = $api->searchTvShow($name,'fr');
+        $result = $api->searchTvShow($name,'fr');
 
-        $jsonContent = $serializer->serialize($search, 'json');
+        $jsonContent = $serializer->serialize($result, 'json');
 
-        return new JsonResponse($jsonContent);
+        return new Response($jsonContent);
     }
+
+    /**
+     * Get Serie and All Episode by theTvId ID
+     *
+     * @Route("/series/{serieId}/all", name="tvdb_series_episodes")
+     * @Method("GET")
+     */
+    public function getSerieAndEpisodesAction($serieId)
+    {
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $api = $this->container->get('thetvdb');
+        $result = $api->getTvShowAndEpisodes($serieId,'fr');
+
+        $jsonContent = $serializer->serialize($result, 'json');
+
+        return new Response($jsonContent);
+    }
+
+    /**
+     * Get Serie  by theTvId ID
+     *
+     * @Route("/serie/{serieId}", name="tvdb_serie")
+     * @Method("GET")
+     */
+    public function getSerieAction($serieId)
+    {
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $api = $this->container->get('thetvdb');
+        $result = $api->getTvShow($serieId,'fr');
+
+        $jsonContent = $serializer->serialize($result, 'json');
+
+        return new Response($jsonContent);
+    }
+
 
 }
 
