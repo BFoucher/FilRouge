@@ -25,14 +25,23 @@
 
             $.ajax({
                         method: "GET",
-                         url: "/tvdb/series/"+serieName
+                        url: "/tvdb/series/"+serieName,
+                        beforeSend: function(){
+                            $('#tvdb_result').html('loading...');
+                        }
                     })
                     .done(function( msg ) {
-                        var series = JSON.parse(msg);
-                        for (var i=0; i<series.length;i++){
-                            var serie = series[i];
-                            showSerie(serie);
+                        if (msg != '[]'){
+                            $('#tvdb_result').html('');
+                            var series = JSON.parse(msg);
+                            for (var i=0; i<series.length;i++){
+                                var serie = series[i];
+                                showSerie(serie);
+                            }
+                        }else{
+                            $('#tvdb_result').html('Aucun résultat trouvé sur TheTVDB');
                         }
+
                     });
 
         });
@@ -54,10 +63,11 @@
         function showSerie(serie){
             if (serie.bannerUrl){
                 $('#tvdb_result').append('<img src="'+serie.bannerUrl+'" height="60px" id="serie-'+serie.id+'-'+serie.language+'"><br />');
-                $('#serie-'+serie.id+'-'+serie.language).on('click',hydratSerie(serie));
+
             }else{
-                $('#tvdb_result').append('<h4>'+serie.name+'</h4>');
+                $('#tvdb_result').append('<div class="btn btn-lg btn-default" id="serie-'+serie.id+'-'+serie.language+'">'+serie.name+'</div><br />');
             }
+            $('#serie-'+serie.id+'-'+serie.language).on('click',hydratSerie(serie));
         }
     </script>
 {% endblock %}

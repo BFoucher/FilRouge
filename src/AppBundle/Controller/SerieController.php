@@ -30,17 +30,6 @@ class SerieController extends Controller
      */
     public function indexAction()
     {
-        $encoders = array(new XmlEncoder(), new JsonEncoder());
-        $normalizers = array(new GetSetMethodNormalizer());
-        $serializer = new Serializer($normalizers, $encoders);
-
-        $api = $this->container->get('thetvdb');
-        $search = $api->searchTvShow('girls');
-
-        $jsonContent = $serializer->serialize($search, 'json');
-        dump($jsonContent);
-
-
         $em = $this->getDoctrine()->getManager();
 
         $series = $em->getRepository('AppBundle:Serie')->getAll();

@@ -5,12 +5,14 @@
     <p><a href="{{ path('serie_new') }}" class="btn btn-primary btn-bg">Create a new entry</a></p>
     <div class="row">
         {% for serie in series %}
-            <div class="colx-xs-6 col-sm-3 ">
-                <figure class="thumbnail">
+        <a href="{{ path('serie_show', { 'id': serie.id }) }}">
+            <div class="col-xs-6 col-sm-3 col-md-2">
+                <figure class="thumbnail" >
                     <img src="{{ serie.picture[0].url }}" alt="{{ serie.picture[0].alt }}" width="80%" class="img-responsive">
-                    <figcaption class="text-center bigger caption"><a href="{{ path('serie_show', { 'id': serie.id }) }}">{{ serie.name }}</figcaption>
+                    <figcaption class="text-center big caption">{{ serie.name }}</figcaption>
                 </figure>
             </div>
+            </a>
         {% endfor %}
     </div>
 {% endblock %}
