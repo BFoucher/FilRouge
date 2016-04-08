@@ -62,15 +62,21 @@ class SerieController extends Controller
     /**
      * Finds and displays a Serie entity.
      *
-     * @Route("/{id}", name="serie_show")
+     * @Route("/{serieId}", name="serie_show")
      * @Method("GET")
      */
-    public function showAction(Serie $serie)
+    public function showAction($serieId)
     {
+        $em = $this->getDoctrine()->getEntityManager();
+        $serie = $em->getRepository('AppBundle:Serie')->getOneWithEpisodes($serieId);
+        $nbSaisons = $em->getRepository('AppBundle:Episode')->countNumberSaison($serieId);
         $deleteForm = $this->createDeleteForm($serie);
+
+        dump($nbSaisons);
 
         return $this->render('serie/show.html.twig', array(
             'serie' => $serie,
+            'nbSaisons' => $nbSaisons,
             'delete_form' => $deleteForm->createView(),
         ));
     }

@@ -21,38 +21,56 @@ class SerieRepository extends EntityRepository
         return $query->getSingleScalarResult();
     }
 
-	public function getAll(){
-      $query = $this->createQueryBuilder('serie')
-      		->select('serie')
-      		->orderBy('serie.name','ASC')
-      		->where('serie.validated= :is_validated' )
-      		->setParameter(':is_validated',true)
+    public function getAll(){
+        $query = $this->createQueryBuilder('serie')
+            ->select('serie')
+            ->orderBy('serie.name','ASC')
+            ->where('serie.validated= :is_validated' )
+            ->setParameter(':is_validated',true)
             ->getQuery();
 
         return $query->getResult();
 
     }
 
-
-        public function getOne($serieId){
+    public function getOne($serieId){
         $query = $this->createQueryBuilder('serie')
             ->select('serie')
             ->where('serie.id = :id')
-      		->andWhere('serie.validated= :is_validated')
-      		->setParameter('id', $serieId)
-      		->setParameter(':is_validated',true)
+            ->andWhere('serie.validated= :is_validated')
+            ->setParameter('id', $serieId)
+            ->setParameter(':is_validated',true)
             ->getQuery();
 
         return $query->getResult();
     }
 
+    public function getOneWithEpisodes($serieId){
+        $query = $this->createQueryBuilder('serie')
+            ->select('serie')
+            ->join('serie.episodes','episode')
+            ->addSelect('episode')
+            ->join('serie.language','language')
+            ->addSelect('language')
+            ->join('serie.picture','picture')
+            ->addSelect('picture')
+            ->where('serie.id = :id')
+            ->andWhere('serie.validated= :is_validated')
+            ->orderBy('episode.saison,episode.episodeNumber')
+            ->setParameter('id', $serieId)
+            ->setParameter(':is_validated',true)
+            ->getQuery();
 
-        public function getLastSerie($nb = 5,$validated = true){
+        return $query->getSingleResult();
+    }
+
+
+    public function getLastSerie($nb = 5,$validated = true){
         $query = $this->createQueryBuilder('serie')
             ->select('serie')
             ->orderBy('serie.id', 'DESC')
             ->andWhere('serie.validated= :is_validated')
-      		->setParameter(':is_validated',$validated)
+            ->setParameter(':is_validated',$validated)
             ->setMaxResults($nb)
             ->getQuery();
 

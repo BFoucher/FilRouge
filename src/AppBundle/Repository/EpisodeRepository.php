@@ -58,5 +58,16 @@ class EpisodeRepository extends EntityRepository
         return $query->getResult();
     }
 
+    public function countNumberSaison($serieId){
+        $query = $this->createQueryBuilder('episode')
+            ->select('COUNT ( DISTINCT episode.saison )')
+            ->where('episode.validated = true')
+            ->andWhere('episode.serie = :serie')
+            ->setParameter(':serie',$serieId)
+            ->getQuery();
+
+        return $query->getSingleScalarResult();
+    }
+
 
 }
