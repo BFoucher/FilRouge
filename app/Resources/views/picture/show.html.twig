@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Picture</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ picture.id }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ picture.url }}</td>
+            </tr>
+            <tr>
+                <th>Alt</th>
+                <td>{{ picture.alt }}</td>
+            </tr>
+            <tr>
+                <th>Validated</th>
+                <td>{% if picture.validated %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('picture_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

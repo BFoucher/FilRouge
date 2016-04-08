@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Picture list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Url</th>
+                <th>Alt</th>
+                <th>Validated</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for picture in pictures %}
+            <tr>
+                <td><a href="{{ path('picture_show', { 'id': picture.id }) }}">{{ picture.id }}</a></td>
+                <td>{{ picture.url }}</td>
+                <td>{{ picture.alt }}</td>
+                <td>{% if picture.validated %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('picture_show', { 'id': picture.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}
