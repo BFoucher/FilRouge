@@ -1,0 +1,49 @@
+
+    {% for poster in posters %}
+
+        <figure style="left: {{ (loop.index-1)*90 }}px;">
+            <a href="{{ path('serie_show',{'serieId':poster.id}) }}">
+                <img src="{{ asset(poster.picture[0].url) }}" title="" />
+            </a>
+        </figure>
+
+    {% endfor %}
+
+
+
+{% block stylesheets %}
+    <style>
+        .rand-poster{
+            position: relative;
+            padding-top: 20px;
+            height: 200px;
+            overflow:hidden;
+            z-index: 2;
+        }
+        .rand-poster figure{
+            position: absolute;
+            margin-right: -15px;
+            transform: rotate(8deg);
+            z-index: 2;
+            transition: 0.3s;
+        }
+        .rand-poster img{
+            max-height: 150px;
+            width: 100px;
+        }
+        .rand-poster img:hover{
+            position: inherit;
+        }
+        .rand-poster figure:nth-child(2n+0){
+            transform: rotate(-7deg);
+        }
+        .rand-poster figure:nth-child(4n+1){
+            transform: rotate(16deg);
+        }
+        .rand-poster figure:hover{
+            transform: rotate(0deg);
+            transform: scale(1.5);
+            z-index: 3;
+        }
+    </style>
+{% endblock %}

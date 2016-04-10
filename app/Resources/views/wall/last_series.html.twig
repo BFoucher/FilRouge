@@ -1,0 +1,31 @@
+{% for serie in lastSeries %}
+
+        <figure class="thumbnail-poster ">
+            <a href="{{ path('serie_show',{'serieId':serie.id}) }}">
+            <img src="{{ asset(serie.picture[0].url) }}" title="{{ serie.picture[0].alt }}"  />
+            <figcaption>{{ serie.name }}</figcaption>
+            </a>
+        </figure>
+
+{% endfor %}
+
+<style>
+    .thumbnail-poster{
+        display: inline-block;
+        max-width: 100px;
+    }
+    .thumbnail-poster img{
+        max-height: 150px;;
+    }
+    .thumbnail-poster figcaption{
+        margin: 0px;
+        padding: 3px;
+        display: block; /* so height and width actually take affect */
+        max-width: 100%;
+        text-align: center;
+        /* so overflow hidden works and keeps text on one row */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; /
+    }
+</style>

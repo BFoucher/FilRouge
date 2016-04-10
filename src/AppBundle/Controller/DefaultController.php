@@ -13,9 +13,16 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        ));
+        $em = $this->getDoctrine()->getManager();
+        $lastSeries = $em->getRepository('AppBundle:Serie')->getLastSerie();
+        //TODO: Create a random search in Repo, only need poster & serie Id
+        $randPoster = $em->getRepository('AppBundle:Serie')->getLastSerie(30);
+        $lastEpisodes = $em->getRepository('AppBundle:Episode')->getLastepisode();
+
+        return $this->render('wall/wall.html.twig',[
+            'lastSeries' => $lastSeries,
+            'lastEpisodes' => $lastEpisodes,
+            'posters' =>$randPoster
+        ]);
     }
 }
