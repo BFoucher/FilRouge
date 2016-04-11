@@ -3,6 +3,15 @@ body{
     color: #a2a1a1;
 }
 
+a{
+    color : #6a6969;
+    text-decoration: none;
+}
+a:hover{
+    color: #92afff;
+    text-decoration: none;
+}
+
 .subtitles{
     background-color: #333333;
     color: #d5d5d5;

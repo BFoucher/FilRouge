@@ -17,8 +17,10 @@
                 </div>
                 <div class="col-xs-12 divider text-center">
                     <div class="col-xs-12 col-sm-3 emphasis">
-                        <h2><strong> 3 </strong></h2>
-                        <p><small>Series Suivies</small></p>
+                        <a href="{{ path('user_follows',{'user':user.id}) }}" class="clear" >
+                            <h2 class=""><strong> {{ user.follow|length }} </strong></h2>
+                            <p><small>Series Suivies</small></p>
+                        </a>
                     </div>
                     <div class="col-xs-12 col-sm-3 emphasis">
                         <h2><strong>961</strong></h2>

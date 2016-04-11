@@ -48,19 +48,25 @@ class User extends BaseUser
     private $avatar;
 
     /**
-    * @var string
-    *
-    * @ORM\OneToMany(targetEntity= "Episode", mappedBy= "author", cascade={"remove"})
-    */
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity= "Episode", mappedBy= "author", cascade={"remove"})
+     */
     private $episode;
 
 
     /**
-    * @var string
-    *
-    * @ORM\OneToMany(targetEntity= "Serie", mappedBy= "author", cascade={"remove"})
-    */
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity= "Serie", mappedBy= "author", cascade={"remove"})
+     */
     private $serie;
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Serie")
+     */
+    private $follow;
 
 
     public function __construct()
@@ -69,7 +75,7 @@ class User extends BaseUser
         $this->setBirth(new \DateTime());
     }
 
-            /**
+    /**
      * Set serie
      *
      * @param string $serie
@@ -85,14 +91,14 @@ class User extends BaseUser
     /**
      * Get serie
      *
-     * @return string 
+     * @return string
      */
     public function getserie()
     {
         return $this->serie;
     }
 
-            /**
+    /**
      * Set episode
      *
      * @param string $episode
@@ -108,14 +114,14 @@ class User extends BaseUser
     /**
      * Get episode
      *
-     * @return string 
+     * @return string
      */
     public function getEpisode()
     {
         return $this->episode;
     }
 
-      
+
 
     /**
      * Add episode
@@ -179,7 +185,7 @@ class User extends BaseUser
     /**
      * Get firstName
      *
-     * @return string 
+     * @return string
      */
     public function getFirstName()
     {
@@ -202,7 +208,7 @@ class User extends BaseUser
     /**
      * Get lastName
      *
-     * @return string 
+     * @return string
      */
     public function getLastName()
     {
@@ -225,7 +231,7 @@ class User extends BaseUser
     /**
      * Get birth
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getBirth()
     {
@@ -248,7 +254,7 @@ class User extends BaseUser
     /**
      * Get avatar
      *
-     * @return \AppBundle\Entity\Picture 
+     * @return \AppBundle\Entity\Picture
      */
     public function getAvatar()
     {
@@ -276,5 +282,53 @@ class User extends BaseUser
     public function getAge(){
         $diff = $this->birth->diff(new \DateTime());
         return $diff->format('%y');
+    }
+
+    /**
+     * Add follow
+     *
+     * @param \AppBundle\Entity\Serie $follow
+     * @return User
+     */
+    public function addFollow(\AppBundle\Entity\Serie $follow)
+    {
+        $this->follow[] = $follow;
+
+        return $this;
+    }
+
+    /**
+     * Remove follow
+     *
+     * @param \AppBundle\Entity\Serie $follow
+     */
+    public function removeFollow(\AppBundle\Entity\Serie $follow)
+    {
+        $this->follow->removeElement($follow);
+    }
+
+    /**
+     * Get follow
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFollow()
+    {
+        return $this->follow;
+    }
+
+    /**
+     * Check if User Follow or Not a Serie
+     *
+     * @param Serie $serie
+     *
+     * @return bool
+     */
+    public function isFollow(Serie $serie){
+        if ($this->follow->contains($serie)){
+            return true;
+        }
+        return false;
+
     }
 }

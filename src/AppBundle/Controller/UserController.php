@@ -42,4 +42,19 @@ class UserController extends Controller
         ));
     }
 
+    /**
+     * Show My Follows Series.
+     *
+     * @Route("/{user}/follows", name="user_follows")
+     * @Method("GET")
+     */
+    public function showFollowsSeriesAction($user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('AppBundle:User')->getUserWithFollowsSeries($user);
+        return $this->render('user/follows.html.twig', array(
+            'user' => $user
+        ));
+    }
+
 }

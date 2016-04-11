@@ -21,4 +21,19 @@ class UserRepository extends EntityRepository
 
         return $query->getResult();
     }
+
+    public function getUserWithFollowsSeries($userId){
+        $query = $this->createQueryBuilder('u')
+            ->select('u')
+            ->leftJoin('u.follow','series')
+            ->addSelect('series')
+            ->leftJoin('series.picture','poster')
+            ->addSelect('poster')
+            ->where('u.id = :userId')
+            ->setParameter(':userId',$userId)
+            ->orderBy('series.name', 'ASC')
+            ->getQuery();
+
+        return $query->getSingleResult();
+    }
 }
