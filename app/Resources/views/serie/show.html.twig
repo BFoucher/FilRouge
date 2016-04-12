@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block breadcrumbs %}
+    <a href="{{ path('serie_index') }}" class="btn btn-bc">Séries</a>
+    <a href="#" class="btn btn-bc">{{ serie.name }}</a>
+{% endblock %}
+
 {% block body %}
     <div class="col-xs-12">
         <a href="{{ path('serie_index') }}" class="btn btn-primary btn-lg">Back to the list</a>
@@ -80,11 +85,11 @@
                             {% endif %}
                             <tr>
                                 <td>{{ episode.episodeNumber}} - {{ episode.name }}
-                                    {% if app.user.isWatch(episode) %}
+                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and app.user.isWatch(episode) %}
                                         <a href="{{ path('episode_watch',{'episode':episode.id}) }}">
                                             <span class="btn btn-info pull-right"><i class="fa fa-eye-slash"></i></span>
                                         </a>
-                                    {% else %}
+                                    {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                                         <a href="{{ path('episode_watch',{'episode':episode.id}) }}">
                                             <span class="btn btn-primary pull-right"><i class="fa fa-eye"></i></span>
                                         </a>
@@ -112,6 +117,9 @@
         table, table tbody, table tbody tr, table tbody tr td{
             min-width: 100%;
             display: table;
+        }
+        table tbody tr td{
+            min-height: 30px !important;
         }
 
     </style>

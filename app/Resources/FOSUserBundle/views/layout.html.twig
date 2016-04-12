@@ -1,5 +1,8 @@
 {% extends ('::base.html.twig') %}
-
+{% block breadcrumbs %}
+   {{ parent() }}
+    <a href="#" class="btn btn-bc">Mon Compte</a>
+{% endblock %}
 
 {% block body %}
     <div class="block">

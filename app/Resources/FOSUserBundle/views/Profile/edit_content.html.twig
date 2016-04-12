@@ -8,6 +8,7 @@
         <div class="divider">
             <p class="biggest text-primary"><strong>{{ app.user.username }}</strong></p>
             <p class="">{{ app.user.name }}</p>
+            <p class="">{{ app.user.age }} ans</p>
         </div>
         <div class="divider">
             {{ form_label(form.email) }}
@@ -15,13 +16,6 @@
             <div class="input-group">
                 <span class="input-group-addon" id="email"><i class="fa fa-at"></i></span>
                 {{ form_widget(form.email, {'attr': {'class': 'form-control', 'aria-describedby':'email'}}) }}
-            </div>
-        </div>
-        <div class="">
-            {{ form_label(form.birth) }}
-            <div class="input-group">
-                <span class="input-group-addon" id="birth"><i class="fa fa-birthday-cake"></i></span>
-                {{ form_widget(form.birth, {'attr': {'class': 'form-control', 'aria-describedby':'birth'}}) }}
             </div>
         </div>
         <div class="">

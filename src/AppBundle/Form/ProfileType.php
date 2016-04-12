@@ -13,10 +13,6 @@ class ProfileType extends AbstractType
             //->add('lastName')
             //->add('birth', 'date')
             ->add('avatar')
-            ->add('birth', DateType::class, array(
-                'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
-            ))
             ->remove('username')
         ;
     }

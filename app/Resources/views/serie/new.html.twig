@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block breadcrumbs %}
+    <a href="{{ path('serie_index') }}" class="btn btn-bc">Séries</a>
+    <a href="#" class="btn btn-bc">Ajouter une série</a>
+{% endblock %}
+
+
 {% block body %}
     <h1>Serie creation</h1>
 

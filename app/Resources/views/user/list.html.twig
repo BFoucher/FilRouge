@@ -1,5 +1,10 @@
 {% extends '::base.html.twig' %}
 
+{% block breadcrumbs %}
+    <a href="{{ path('user_list') }}" class="btn btn-bc">Users</a>
+{% endblock %}
+
+
 {% block body %}
 
 <div class="container dynamicTile">

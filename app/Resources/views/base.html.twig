@@ -66,10 +66,18 @@
 </nav>
 <body>
 <div class="container-fluid">
+    <div class="row">
+        <div id="bc1" class="btn-group btn-breadcrumb">
+            <a href="{{ path('homepage') }}" class="btn btn-bc"><i class="fa fa-home"></i></a>
+        {% block breadcrumbs %}
+        {% endblock %}
+        </div>
+    </div>
     {% block body %}{% endblock %}
 </div>
 <script src="{{ asset('js/jquery-2.2.2.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/myscript.js') }}"></script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>
