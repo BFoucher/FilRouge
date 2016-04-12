@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-xs-6">
                     {% if app.user.isFollow(serie) %}
-                        <a href="{{ path('serie_follow',{'serie':serie.id}) }}" class="btn btn-info btn-block bigger"><i class="fa fa-eye"></i> UnFollow</a>
+                        <a href="{{ path('serie_follow',{'serie':serie.id}) }}" class="btn btn-info btn-block bigger"><i class="fa fa-eye-slash"></i> UnFollow</a>
                     {% else %}
                         <a href="{{ path('serie_follow',{'serie':serie.id}) }}" class="btn btn-primary btn-block bigger"><i class="fa fa-eye"></i> Follow</a>
                     {% endif %}
@@ -60,7 +60,7 @@
                         <div class="list-group">
                             {% for i in 1..nbSaisons %}
                                 <a href="#saison-{{ i }}" id="#saison-{{ i }}-tab" data-toggle="tab" aria-controls="saison-{{ i }}">
-                                    <button type="button" class="list-group-item">Saison {{ i }}</button>
+                                    <button type="button" class="list-group-item">Saison {{ i }} <span class="label label-info pull-right">0/18</span></button>
                                 </a>
 
                             {% endfor %}
@@ -75,11 +75,25 @@
                         </div>
                         {% endif %}
                         {% set current_saison = episode.saison %}
-                        <div role="tabpanel" class="tab-pane fade" id="saison-{{ current_saison }}" aria-labelledby="saison-{{ current_saison }}">
+
+                        <table role="tabpanel" id="saison-{{ current_saison }}" aria-labelledby="saison-{{ current_saison }}" class="table table-hover tab-pane fade">
                             {% endif %}
-                            <p>{{ episode.episodeNumber}} - {{ episode.name }}</p>
+                            <tr>
+                                <td>{{ episode.episodeNumber}} - {{ episode.name }}
+                                    {% if app.user.isWatch(episode) %}
+                                        <a href="{{ path('episode_watch',{'episode':episode.id}) }}">
+                                            <span class="btn btn-info pull-right"><i class="fa fa-eye-slash"></i></span>
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ path('episode_watch',{'episode':episode.id}) }}">
+                                            <span class="btn btn-primary pull-right"><i class="fa fa-eye"></i></span>
+                                        </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
                             {% endfor %}
-                        </div>
+                        </table>
+
                     </div>
                 </div>
             </div>
@@ -92,4 +106,14 @@
             </div>
         </div>
     </div>
+
+    <style>
+
+        table, table tbody, table tbody tr, table tbody tr td{
+            min-width: 100%;
+            display: table;
+        }
+
+    </style>
+
 {% endblock %}

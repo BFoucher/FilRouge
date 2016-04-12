@@ -68,6 +68,11 @@ class User extends BaseUser
      */
     private $follow;
 
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Episode")
+     */
+    private $watch;
 
     public function __construct()
     {
@@ -326,6 +331,54 @@ class User extends BaseUser
      */
     public function isFollow(Serie $serie){
         if ($this->follow->contains($serie)){
+            return true;
+        }
+        return false;
+
+    }
+
+    /**
+     * Add watch
+     *
+     * @param \AppBundle\Entity\Episode $watch
+     * @return User
+     */
+    public function addWatch(\AppBundle\Entity\Episode $watch)
+    {
+        $this->watch[] = $watch;
+
+        return $this;
+    }
+
+    /**
+     * Remove watch
+     *
+     * @param \AppBundle\Entity\Episode $watch
+     */
+    public function removeWatch(\AppBundle\Entity\Episode $watch)
+    {
+        $this->watch->removeElement($watch);
+    }
+
+    /**
+     * Get watch
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWatch()
+    {
+        return $this->watch;
+    }
+
+    /**
+     * Check if User have Watch or Not an Episode
+     *
+     * @param Episode $episode
+     *
+     * @return bool
+     */
+    public function isWatch(\AppBundle\Entity\Episode  $episode){
+        if ($this->watch->contains($episode)){
             return true;
         }
         return false;
