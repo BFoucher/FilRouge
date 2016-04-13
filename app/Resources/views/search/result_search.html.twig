@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+{% block breadcrumbs %}
+    <a href="#" class="btn btn-bc">Rechercher</a>
+{% endblock %}
+
+{% block body %}
+    <h1>Résultats de recherche</h1>
+    <h2>Séries</h2>
+    <ul>
+        {% for serie in series %}
+            <li>{{ serie.name }}</li>
+            {% endfor %}
+    </ul>
+    <h2>Episodes</h2>
+    <h2>Users</h2>
+{% endblock %}

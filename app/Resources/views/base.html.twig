@@ -31,6 +31,21 @@
                 <li><a href="{{ path('episode_index') }}">Episodes</a></li>
                 <li><a href="{{ path('user_list') }}">Membres</a></li>
             </ul>
+            {# search #}
+            <div class="col-sm-3">
+                <div id="imaginary_container">
+                    <form method="POST" action="{{ path('search') }}">
+                    <div class="input-group stylish-input-group">
+                        <input type="text" name="search" id="search" class="form-control"  placeholder="Search" >
+                    <span class="input-group-addon">
+                        <button type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                    </div>
+                    </form>
+                </div>
+            </div>
             {# User Links #}
 
             <ul class="nav navbar-nav navbar-right">
@@ -65,6 +80,7 @@
     </div>
 </nav>
 <body>
+
 <div class="container-fluid">
     <div class="row">
         <div id="bc1" class="btn-group btn-breadcrumb">
