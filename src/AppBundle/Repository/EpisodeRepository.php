@@ -69,5 +69,24 @@ class EpisodeRepository extends EntityRepository
         return $query->getSingleScalarResult();
     }
 
+    public function searchLike($like,$limit = 10){
+        //TODO : Search in description ?
+        $query = $this->createQueryBuilder('episode')
+            ->select('episode')
+            ->join('episode.serie','serie')
+            ->addSelect('serie')
+            ->join('serie.picture','picture')
+            ->addSelect('picture')
+            ->orderBy('episode.name','ASC')
+            ->where('episode.validated= :is_validated' )
+            ->andWhere('episode.name LIKE :like')
+            ->setParameter(':is_validated',true)
+            ->setParameter(':like','%'.$like.'%')
+            ->setMaxResults($limit)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
 
 }

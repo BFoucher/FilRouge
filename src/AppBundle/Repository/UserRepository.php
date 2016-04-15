@@ -36,4 +36,16 @@ class UserRepository extends EntityRepository
 
         return $query->getSingleResult();
     }
+
+    public function searchLike($like,$limit = 10){
+        $query = $this->createQueryBuilder('user')
+            ->select('user')
+            ->orderBy('user.username','ASC')
+            ->Where('user.username LIKE :like')
+            ->setParameter(':like','%'.$like.'%')
+            ->setMaxResults($limit)
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }
