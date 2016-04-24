@@ -77,3 +77,10 @@ fos_user:
     profile:
             form:
                 type: AppBundle\Form\ProfileType
+
+snc_redis:
+    clients:
+        default:
+            type: predis
+            alias: default
+            dsn: redis://localhost
