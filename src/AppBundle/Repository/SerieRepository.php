@@ -77,8 +77,20 @@ class SerieRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function searchLike($like){
-        //TODO: A good query...
+    public function searchLike($like,$limit = 10){
+        //TODO : Search in description ?
+        $query = $this->createQueryBuilder('serie')
+            ->select('serie')
+            ->join('serie.picture','picture')
+            ->addSelect('picture')
+            ->orderBy('serie.name','ASC')
+            ->where('serie.validated= :is_validated' )
+            ->andWhere('serie.name LIKE :like')
+            ->setParameter(':is_validated',true)
+            ->setParameter(':like','%'.$like.'%')
+            ->setMaxResults($limit)
+            ->getQuery();
 
+        return $query->getResult();
     }
 }

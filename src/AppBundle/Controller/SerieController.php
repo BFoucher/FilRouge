@@ -67,12 +67,12 @@ class SerieController extends Controller
      */
     public function showAction($serieId)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $serie = $em->getRepository('AppBundle:Serie')->getOneWithEpisodes($serieId);
         $nbSaisons = $em->getRepository('AppBundle:Episode')->countNumberSaison($serieId);
         $deleteForm = $this->createDeleteForm($serie);
 
-        dump($nbSaisons);
+        //  dump($nbSaisons);
 
         return $this->render('serie/show.html.twig', array(
             'serie' => $serie,
