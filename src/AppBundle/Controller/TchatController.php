@@ -25,16 +25,26 @@ class TchatController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $messages = $em->getRepository('AppBundle:Tchat')->getLast();
-        $message = new Tchat();
-        $form = $this->createForm('AppBundle\Form\TchatType',$message);
+        $form = $this->formTchat();
 
         return $this->render(':tchat:index.html.twig', array(
             'messages'=>$messages,
-            'form' => $form->createView()
+            'form' => $form
         ));
 
     }
 
+
+    /**
+     * Generate Form to Send a Message
+     *
+     */
+    public function formTchat(){
+        $newMessage = new Tchat();
+        $form = $this->createForm('AppBundle\Form\TchatType',$newMessage);
+
+        return $form->createView();
+    }
 
     /**
      * Post a Message
@@ -63,7 +73,7 @@ class TchatController extends Controller
             $em->flush();
             $responseMessage = array(
                 'date' => $message->getDate()->format('d/m h:i'),
-                'message' => $message->getMessage(),
+                'message' => htmlentities($message->getMessage()),
                 'author' => array(
                     'username' => $user->getUsername(),
                     'avatar' => $user->getAvatar())

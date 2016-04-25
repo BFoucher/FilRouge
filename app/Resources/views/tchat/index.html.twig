@@ -1,164 +1,31 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <div class="col-xs-8 col-xs-offset-1" id="chat">
+    <div class="col-xs-12  col-sm-8 col-sm-offset-1" id="chat">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">On en parle:</h3>
             </div>
-            <div class="panel-body text-center">
-                <ul class="chat" id="chat-content">
-                    {% for message in messages %}
-                        <li class="left clearfix"><span class="chat-img pull-left">
-                            <img src="{{ message.author.avatar }}" alt="User Avatar" class="img-circle avatar" />
-                        </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <strong class="primary-font">{{ message.author.username }}</strong> <small class="pull-right text-muted">
-                                        <span class="glyphicon glyphicon-time"></span>{{ message.date|date('d/m h:s') }}</small>
-                                </div>
-                                <p>
-                                    {{ message.message }}
-                                </p>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
+            <div class="panel-body text-center" id="chat-content">
+                {% include 'tchat/content.html.twig' %}
             </div>
             <div class="panel-footer">
-                <div class="input-group">
-                    {{ form_start(form, {'attr': {'class': 'form'}}) }}
-                    {{ form_widget(form) }}
-                    <span class="input-group-btn">
-            <input type="submit" value="Send" class="btn btn-success btn-sm" id="btn-send">
-        </span>
-                    {{ form_end(form) }}
-                </div>
+                {% if is_granted('ROLE_USER') %}
+                    <div class="input-group col-xs-12 chat-input">
+                        {{ form_start(form, {'attr': {'class': 'form-inline form-tchat'}}) }}
+                        <div class="input-group">
+                            {{ form_widget(form.message, {'attr': {'class': 'form-control chat-input'}}) }}
+                            <span class="input-group-btn">
+                                <input type="submit" value="Go" class="btn btn-info" id="btn-send">
+                              </span>
+                        </div><!-- /input-group -->
+                        {{ form_widget(form) }}
+                        {{ form_end(form) }}
+                    </div>
+                {% else %}
+                    <p>Connetez-vous pour poster.</p>
+                {% endif %}
             </div>
         </div>
     </div>
-    </div>
-
-
-    <style>
-        .avatar{
-            max-width: 50px;
-            max-height:50px;
-        }
-        .chat
-        {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .chat li
-        {
-            margin-bottom: 10px;
-            padding-bottom: 5px;
-            border-bottom: 1px dotted #B3A9A9;
-        }
-
-        .chat li.left .chat-body
-        {
-            margin-left: 60px;
-        }
-
-        .chat li.right .chat-body
-        {
-            margin-right: 60px;
-        }
-
-
-        .chat li .chat-body p
-        {
-            margin: 0;
-            color: #777777;
-        }
-
-        .panel .slidedown .glyphicon, .chat .glyphicon
-        {
-            margin-right: 5px;
-        }
-
-        #chat .panel-body
-        {
-            overflow-y: scroll;
-            height: 500px;
-        }
-
-        ::-webkit-scrollbar-track
-        {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-            background-color: #F5F5F5;
-        }
-
-        ::-webkit-scrollbar
-        {
-            width: 12px;
-            background-color: #F5F5F5;
-        }
-
-        ::-webkit-scrollbar-thumb
-        {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-            background-color: #555;
-        }
-    </style>
-{% endblock %}
-
-
-{% block javascripts %}
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    <script>
-        function displayMessage(data){
-            var htmlCraCra = '<li class="left clearfix">'+
-                    '<span class="chat-img pull-left">'+
-                    '<img src="imgs/default_avatar.png" alt="User Avatar" class="img-circle avatar" />'+
-                    '</span>'+
-                    '<div class="chat-body clearfix">'+
-                    '<div class="header">'+
-                    '<strong class="primary-font">'+data.author.username+'</strong>'+
-                    '<small class="pull-right text-muted">'+
-                    '<span class="glyphicon glyphicon-time"></span>'+data.date+'</small>'+
-                    '</div><p>'+data.message+'</p></div></li>';
-            $('.chat').append(htmlCraCra);
-
-        }
-        $(document).ready(function(){
-            // Listening on notification from server{
-
-            // Getting socket
-            var socket = io('http://127.0.0.1:8081');
-
-            socket.on('notification', function (data) {
-                data = $.parseJSON(data);
-                displayMessage(data);
-            });
-            // Listener on form submit event
-            $(document).on('submit', '.form', function(e) {
-                e.preventDefault();
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/tchat',
-                    data: $(this).serialize(),
-                    success : function(response){
-                        console.log('Message send.');
-                        //On vide le formulaire
-                        $('#tchat_message').val('');
-                        //TODO:Auto Scroll dans les messages...
-                    },
-                    error : function(response){
-                        console.log('Something went wrong.');
-                    },
-                    cache: false
-                });
-
-                return false;
-            });
-
-        });
-    </script>
 {% endblock %}
