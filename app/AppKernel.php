@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new FOS\CommentBundle\FOSCommentBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new Snc\RedisBundle\SncRedisBundle(),
             new AppBundle\AppBundle(),
         );
 

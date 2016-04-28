@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/helpers.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/tchat.css') }}" />
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
@@ -93,6 +94,8 @@
 </div>
 <script src="{{ asset('js/jquery-2.2.2.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/socketio.js') }}"></script>
+<script src="{{ asset('js/tchat.js') }}"></script>
 <script src="{{ asset('js/myscript.js') }}"></script>
 {% block javascripts %}{% endblock %}
 </body>
