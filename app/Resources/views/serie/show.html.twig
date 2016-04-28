@@ -106,8 +106,13 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
+
             <div class="block badger-right badger-info" data-badger="Critiques">
-                bientôt bientôt ...
+                {% if is_granted('ROLE_USER') %}
+                    {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': serie.id} %}
+                {% else %}
+                    <p>Connetez-vous pour accéder aux critiques.</p>
+                {% endif %}
             </div>
         </div>
     </div>
