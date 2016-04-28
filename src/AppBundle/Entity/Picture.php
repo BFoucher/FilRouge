@@ -3,57 +3,141 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Picture
  *
  * @ORM\Table(name="picture")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PictureRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Picture
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
-    private $url;
+    protected $name;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="alt", type="string", length=255)
+     * @Assert\File(maxSize="6000000")
      */
-    private $alt;
+    private $file;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="validated", type="boolean")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $validated;
+    protected $path;
 
     /**
-     * @var string
+     * Sets file.
      *
-     * @ORM\ManyToOne(targetEntity="Serie",inversedBy="picture")
+     * @param UploadedFile $file
      */
-    private $serie;
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+        // check if we have an old image path
+        if (isset($this->path)) {
+            // store the old name to delete after the update
+            $this->temp = $this->path;
+            $this->path = null;
+        } else {
+            $this->path = 'initial';
+        }
+    }
 
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadRootDir().'/'.$this->path;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadDir().'/'.$this->path;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/';
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        // la propriété « file » peut être vide si le champ n'est pas requis
+        if (null === $this->file) {
+            return;
+        }
+        $this->name = microtime();
+        if ($this->path != $this->file->getClientOriginalName()) {
+            $this->path = $this->file->getClientOriginalName();
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        // la propriété « file » peut être vide si le champ n'est pas requis
+        if (null === $this->file) {
+            return;
+        }
+
+        $file_name = $this->file->getClientOriginalName();
+
+        // la méthode « move » prend comme arguments le répertoire cible et
+        // le nom de fichier cible où le fichier doit être déplacé
+        if (!file_exists($this->getUploadRootDir())) {
+            mkdir($this->getUploadRootDir(), 0775, true);
+        }
+        $this->file->move(
+            $this->getUploadRootDir(), $file_name
+        );
+        $this->file = null;
+    }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -61,99 +145,50 @@ class Picture
     }
 
     /**
-     * Set url
+     * Set name
      *
-     * @param string $url
+     * @param string $name
+     *
      * @return Picture
      */
-    public function setUrl($url)
+    public function setName($name)
     {
-        $this->url = $url;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get url
+     * Get name
      *
-     * @return string 
+     * @return string
      */
-    public function getUrl()
+    public function getName()
     {
-        return $this->url;
+        return $this->name;
     }
 
     /**
-     * Set alt
+     * Set path
      *
-     * @param string $alt
+     * @param string $path
+     *
      * @return Picture
      */
-    public function setAlt($alt)
+    public function setPath($path)
     {
-        $this->alt = $alt;
+        $this->path = $path;
 
         return $this;
     }
 
     /**
-     * Get alt
+     * Get path
      *
-     * @return string 
+     * @return string
      */
-    public function getAlt()
+    public function getPath()
     {
-        return $this->alt;
-    }
-
-    /**
-     * Set validated
-     *
-     * @param boolean $validated
-     * @return Picture
-     */
-    public function setValidated($validated)
-    {
-        $this->validated = $validated;
-
-        return $this;
-    }
-
-    /**
-     * Get validated
-     *
-     * @return boolean 
-     */
-    public function getValidated()
-    {
-        return $this->validated;
-    }
-
-        /**
-     * Set serie
-     *
-     * @param string $serie
-     * @return Picture
-     */
-    public function setSerie($serie)
-    {
-        $this->serie = $serie;
-
-        return $this;
-    }
-
-    /**
-     * Get serie
-     *
-     * @return string 
-     */
-    public function getSerie()
-    {
-        return $this->serie;
-    }
-
-    public  function  __toString()
-    {
-        return $this->url;
+        return $this->path;
     }
 }

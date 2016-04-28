@@ -69,6 +69,7 @@ class SerieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $serie = $em->getRepository('AppBundle:Serie')->getOneWithEpisodes($serieId);
+        //$serie = $em->getRepository('AppBundle:Serie')->find($serieId);
         $nbSaisons = $em->getRepository('AppBundle:Episode')->countNumberSaison($serieId);
         $deleteForm = $this->createDeleteForm($serie);
 

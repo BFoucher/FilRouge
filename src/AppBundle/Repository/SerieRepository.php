@@ -48,7 +48,7 @@ class SerieRepository extends EntityRepository
     public function getOneWithEpisodes($serieId){
         $query = $this->createQueryBuilder('serie')
             ->select('serie')
-            ->join('serie.episodes','episode')
+            ->leftjoin('serie.episodes','episode')
             ->addSelect('episode')
             ->join('serie.language','language')
             ->addSelect('language')

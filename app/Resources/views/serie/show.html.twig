@@ -12,7 +12,9 @@
     <div class="row">
         <div class="col-xs-12 col-sm-3">
             <div class="thumbnail">
-                <img src="{{ asset(serie.picture[0].url) }}" alt="{{ serie.picture[0].alt }}" />
+                {% if serie.picture %}
+                <img src="{{ asset(serie.picture.path) }}" alt="" />
+                {% endif %}
             </div>
             <div class="text-center col-xs-6" >
                 <div class="block">

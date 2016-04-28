@@ -3,7 +3,9 @@
 
         <figure style="left: {{ (loop.index-1)*90 }}px;">
             <a href="{{ path('serie_show',{'serieId':poster.id}) }}">
-                <img src="{{ asset(poster.picture[0].url) }}" title="" />
+                {% if serie.picture %}
+                    <img src="{{ asset(serie.picture.path) }}" alt="{{ serie.picture.path }}" width="80%" class="img-responsive">
+                {% endif %}
             </a>
         </figure>
 

@@ -2,7 +2,9 @@
 
         <figure class="thumbnail-poster ">
             <a href="{{ path('serie_show',{'serieId':serie.id}) }}">
-            <img src="{{ asset(serie.picture[0].url) }}" title="{{ serie.picture[0].alt }}"  />
+                {% if serie.picture %}
+                    <img src="{{ asset(serie.picture.path) }}" alt="{{ serie.picture.path }}" width="80%" class="img-responsive">
+                {% endif %}
             <figcaption>{{ serie.name }}</figcaption>
             </a>
         </figure>

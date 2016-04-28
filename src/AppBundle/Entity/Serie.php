@@ -57,10 +57,10 @@ class Serie
     private $episodes;
 
     /**
-    * @var string
-    *
-    * @ORM\OneToMany(targetEntity= "Picture", mappedBy= "serie", cascade={"remove"})
-    */
+     * @var string
+     *
+     * @ORM\OneToOne(targetEntity= "Picture", cascade={"all"})
+     */
     private $picture;
 
     /**
@@ -78,6 +78,14 @@ class Serie
     private $author;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->episodes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -91,7 +99,7 @@ class Serie
      * Set name
      *
      * @param string $name
-     * @return Series
+     * @return Serie
      */
     public function setName($name)
     {
@@ -114,7 +122,7 @@ class Serie
      * Set description
      *
      * @param string $description
-     * @return Series
+     * @return Serie
      */
     public function setDescription($description)
     {
@@ -137,7 +145,7 @@ class Serie
      * Set thTvdbID
      *
      * @param integer $thTvdbID
-     * @return Series
+     * @return Serie
      */
     public function setThTvdbID($thTvdbID)
     {
@@ -160,7 +168,7 @@ class Serie
      * Set validated
      *
      * @param boolean $validated
-     * @return Series
+     * @return Serie
      */
     public function setValidated($validated)
     {
@@ -177,60 +185,6 @@ class Serie
     public function getValidated()
     {
         return $this->validated;
-    }
-
-        /**
-     * Set episodes
-     *
-     * @param string $episode
-     * @return Series
-     */
-    public function setEpisode($episode)
-    {
-        $this->episode = $episode;
-
-        return $this;
-    }
-
-    /**
-     * Get episode
-     *
-     * @return string 
-     */
-    public function getEpisode()
-    {
-        return $this->episode;
-    }
-
-    /**
-     * Set language
-     *
-     * @param string $language
-     * @return Episode
-     */
-    public function setLanguage($language)
-    {
-        $this->language = $language;
-
-        return $this;
-    }
-
-    /**
-     * Get language
-     *
-     * @return string 
-     */
-    public function getLanguage()
-    {
-        return $this->language;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->episodes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->picture = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -267,36 +221,49 @@ class Serie
     }
 
     /**
-     * Add picture
+     * Set picture
      *
      * @param \AppBundle\Entity\Picture $picture
      * @return Serie
      */
-    public function addPicture(\AppBundle\Entity\Picture $picture)
+    public function setPicture(\AppBundle\Entity\Picture $picture = null)
     {
-        $this->picture[] = $picture;
+        $this->picture = $picture;
 
         return $this;
     }
 
     /**
-     * Remove picture
-     *
-     * @param \AppBundle\Entity\Picture $picture
-     */
-    public function removePicture(\AppBundle\Entity\Picture $picture)
-    {
-        $this->picture->removeElement($picture);
-    }
-
-    /**
      * Get picture
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \AppBundle\Entity\Picture 
      */
     public function getPicture()
     {
         return $this->picture;
+    }
+
+    /**
+     * Set language
+     *
+     * @param \AppBundle\Entity\Language $language
+     * @return Serie
+     */
+    public function setLanguage(\AppBundle\Entity\Language $language = null)
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    /**
+     * Get language
+     *
+     * @return \AppBundle\Entity\Language 
+     */
+    public function getLanguage()
+    {
+        return $this->language;
     }
 
     /**
@@ -321,9 +288,4 @@ class Serie
     {
         return $this->author;
     }
-
-        public function __toString()
-{
-    return $this->getName();
-}
 }
