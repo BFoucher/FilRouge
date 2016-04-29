@@ -84,17 +84,12 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
 
                         $serie->setName($tvdbSerie->getName());
                         $serie->setDescription($tvdbSerie->getOverview());
-                        $serie->setEpisode('null');
                         $serie->setLanguage($french);
                         $serie->setThTvdbID($tvdbSerie->getId());
                         $serie->setAuthor($userModerator);
                         $serie->setValidated(true);
-                        $seriePicture = new Picture();
-                        $seriePicture->setUrl($tvdbSerie->getPosterUrl());
-                        $seriePicture->setAlt('Affiche');
-                        $seriePicture->setValidated(true);
-                        $seriePicture->setSerie($serie);
-                        $serie->addPicture($seriePicture);
+                        $seriePicture = new Picture($tvdbSerie->getPosterUrl());
+                        $serie->setPicture($seriePicture);
                         $manager->persist($serie);
                         $manager->persist($seriePicture);
 
