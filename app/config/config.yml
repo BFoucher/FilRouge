@@ -85,7 +85,7 @@ fos_comment:
         model:
             comment: AppBundle\Entity\Comment
             thread: AppBundle\Entity\Thread
-            vote: AppBundle\Entity\Vote
+            vote: AppBundle\Entity\VoteComment
     acl: true
     service:
         acl:
@@ -126,3 +126,11 @@ snc_redis:
             type: predis
             alias: default
             dsn: redis://localhost
+
+dcs_rating:
+    db_driver: orm
+    base_path_to_redirect: / # when the permalink is not configured
+    max_value: 5 # maximum value for the vote (stars displayed)
+    model:
+        rating: AppBundle\Entity\Rating
+        vote: AppBundle\Entity\Vote

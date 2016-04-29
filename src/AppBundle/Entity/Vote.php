@@ -1,17 +1,13 @@
 <?php
-
+// AppBundle/Entity/Vote.php
 namespace AppBundle\Entity;
-
+use DCS\RatingBundle\Entity\Vote as BaseVote;
 use Doctrine\ORM\Mapping as ORM;
-use FOS\CommentBundle\Entity\Vote as BaseVote;
-use FOS\CommentBundle\Model\SignedVoteInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-
 /**
  * @ORM\Entity
  * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  */
-class Vote extends BaseVote 
+class Vote extends BaseVote
 {
     /**
      * @ORM\Id
@@ -19,14 +15,13 @@ class Vote extends BaseVote
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
     /**
-     * Comment of this vote
-     *
-     * @var Comment
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Comment")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Rating", inversedBy="votes")
+     * @ORM\JoinColumn(name="rating_id", referencedColumnName="id")
      */
-    protected $comment;
-
-    
+    protected $rating;
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     */
+    protected $voter;
 }
