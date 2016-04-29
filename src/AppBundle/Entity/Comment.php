@@ -6,52 +6,94 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\CommentBundle\Entity\Comment as BaseComment;
 use FOS\CommentBundle\Model\SignedCommentInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use FOS\CommentBundle\Model\VotableCommentInterface;
 
 /**
- * @ORM\Entity
- * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
- */
-class Comment extends BaseComment implements SignedCommentInterface
+* @ORM\Entity
+* @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
+*/
+class Comment extends BaseComment implements SignedCommentInterface, VotableCommentInterface
 {
-    /**
-     * @ORM\Id
+   /**
+    * @ORM\Id
+    * @ORM\Column(type="integer")
+    * @ORM\GeneratedValue(strategy="AUTO")
+    */
+   protected $id;
+
+   /**
+    * Thread of this comment
+    *
+    * @var Thread
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thread")
+    */
+   protected $thread;
+
+   /**
+    * Author of the comment
+    *
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+    * @var User
+    */
+   protected $author;
+
+       /**
      * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
-    protected $id;
+    protected $score = 0;
+
+   public function setAuthor(UserInterface $author)
+   {
+       $this->author = $author;
+   }
+
+   public function getAuthor()
+   {
+       return $this->author;
+   }
+
+   public function getAuthorName()
+   {
+       if (null === $this->getAuthor()) {
+           return 'Anonymous';
+       }
+
+       return $this->getAuthor()->getUsername();
+   }
+
+   /**
+     * Sets the score of the comment.
+     *
+     * @param integer $score
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+    }
 
     /**
-     * Thread of this comment
+     * Returns the current score of the comment.
      *
-     * @var Thread
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thread")
+     * @return integer
      */
-    protected $thread;
+    public function getScore()
+    {
+        return $this->score;
+    }
 
     /**
-     * Author of the comment
+     * Increments the comment score by the provided
+     * value.
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @var User
+     * @param integer value
+     *
+     * @return integer The new comment score
      */
-    protected $author;
-
-    public function setAuthor(UserInterface $author)
+    public function incrementScore($by = 1)
     {
-        $this->author = $author;
+        $this->score += $by;
     }
 
-    public function getAuthor()
-    {
-        return $this->author;
-    }
 
-    public function getAuthorName()
-    {
-        if (null === $this->getAuthor()) {
-            return 'Anonymous';
-        }
-
-        return $this->getAuthor()->getUsername();
-    }
 }

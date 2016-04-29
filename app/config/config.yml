@@ -85,6 +85,7 @@ fos_comment:
         model:
             comment: AppBundle\Entity\Comment
             thread: AppBundle\Entity\Thread
+            vote: AppBundle\Entity\Vote
     acl: true
     service:
         acl:

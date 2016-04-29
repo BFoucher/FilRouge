@@ -48,11 +48,11 @@ class SerieRepository extends EntityRepository
     public function getOneWithEpisodes($serieId){
         $query = $this->createQueryBuilder('serie')
             ->select('serie')
-            ->leftJoin('serie.episodes','episode')
+            ->join('serie.episodes','episode')
             ->addSelect('episode')
             ->join('serie.language','language')
             ->addSelect('language')
-            ->leftJoin('serie.picture','picture')
+            ->join('serie.picture','picture')
             ->addSelect('picture')
             ->where('serie.id = :id')
             ->andWhere('serie.validated= :is_validated')
@@ -93,4 +93,31 @@ class SerieRepository extends EntityRepository
 
         return $query->getResult();
     }
+
+    public function searchRand(){
+
+   // $query = mysql_query("select * from recherche order by rand() limit 1");
+   // $rep = mysql_fetch_array($query);
+            $query = $this->createQueryBuilder('serie')
+            ->select('serie.id')
+            ->where('serie.validated= :is_validated' )
+            ->setParameter(':is_validated',true)
+            ->getQuery();
+
+            return $query -> getResult();
+            
+        }
+
+        
+
+
+
+
+
+    /*$liste_id = $bdd->query('SELECT id FROM series')->fetchAll();
+    $id_aleatoire = $liste_id[shuffle($liste_id, 1)]['id'];
+    $all = $bdd->query('SELECT * FROM series WHERE id = '.$id_aleatoire);
+    }*/
+
+
 }
