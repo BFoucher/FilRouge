@@ -65,17 +65,13 @@ class LoadUserData implements FixtureInterface
              par certaines expériences de Lena Dunham, une des actrices principales 
              de la série.');
 
-                $serie->setEpisode('null');
+                //$serie->setEpisode('null');
                 $serie->setLanguage($french);
                 $serie->setThTvdbID(0);
                 $serie->setAuthor($userModerator);
                 $serie->setValidated(true);
-                $seriePicture = new Picture();
-                $seriePicture->setUrl('http://www.cinemablend.com/images/sections/40691/_1332368316.jpg');
-                $seriePicture->setAlt('Affiche');
-                $seriePicture->setValidated(true);
-                $seriePicture->setSerie($serie);
-                $serie->addPicture($seriePicture);
+                $seriePicture = new Picture('http://www.cinemablend.com/images/sections/40691/_1332368316.jpg');
+                $serie->setPicture($seriePicture);
                 $manager->persist($serie);
                 $manager->persist($seriePicture);
 
@@ -98,12 +94,8 @@ class LoadUserData implements FixtureInterface
                 $serie->setThTvdbID(0);
                 $serie->setAuthor($userAdmin);
                 $serie->setValidated(false);
-                $seriePicture = new Picture();
-                $seriePicture->setUrl('http://fr.web.img6.acsta.net/pictures/14/03/05/18/02/574226.jpg');
-                $seriePicture->setAlt('Affiche');
-                $seriePicture->setValidated(true);
-                $seriePicture->setSerie($serie);
-                $serie->addPicture($seriePicture);
+                $seriePicture = new Picture('http://fr.web.img6.acsta.net/pictures/14/03/05/18/02/574226.jpg');
+                $serie->setPicture($seriePicture);
                 $manager->persist($serie);
                 $manager->persist($seriePicture);
 
@@ -166,9 +158,7 @@ class LoadUserData implements FixtureInterface
                 $episode->setAuthor($user);
 
                 $manager->persist($episode);
-
-
-
+                
                 $manager->flush();
         }
 }

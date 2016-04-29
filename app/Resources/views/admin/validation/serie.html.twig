@@ -2,7 +2,9 @@
 
 {% block validation_content %}
     <div class="col-xs-3">
-        <img src="{{ serie.picture[0].url }}" alt="{{ serie.picture[0].alt }}" width="100%">
+        {% if serie.picture %}
+            <img src="{{ asset(serie.picture.url) }}" alt="{{ serie.name }}" width="100%">
+        {% endif %}
     </div>
     <div class="col-xs-9">
         <h3><strong>{{ serie.name }}</strong></h3>

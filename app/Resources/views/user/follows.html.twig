@@ -37,7 +37,7 @@
                         <figure class="thumbnail">
                             <a href="{{ path('serie_show',{'serieId':serie.id}) }}">
                                 {% if serie.picture %}
-                                    <img src="{{ asset(serie.picture.path) }}" alt="{{ serie.picture.path }}" width="80%" class="img-responsive">
+                                    <img src="{{ asset(serie.picture.url) }}" alt="{{ serie.name }}" width="80%" class="img-responsive">
                                 {% endif %}
                                 <figcaption class="big">{{ serie.name }}</figcaption>
                             </a>

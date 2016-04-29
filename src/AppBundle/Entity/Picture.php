@@ -38,6 +38,23 @@ class Picture
      */
     protected $path;
 
+
+    public function __construct($url = null)
+    {
+        if ($url){
+            // Ouvre un fichier pour lire un contenu existant
+            $current = file_get_contents($url);
+            // Écrit le résultat dans le fichier
+            //TODO: récupérer le format au lieu d'écrire jpeg à l'arrache...
+            $fileName = uniqid().'.jpeg';
+            $file = $this->getUploadRootDir()."/".$fileName;
+            file_put_contents($file, $current);
+            $this->path = $fileName;
+            $this->name = $url;
+        }
+    }
+
+
     /**
      * Sets file.
      *
@@ -91,7 +108,7 @@ class Picture
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return 'uploads/';
+        return 'uploads';
     }
 
     /**
@@ -104,9 +121,11 @@ class Picture
         if (null === $this->file) {
             return;
         }
-        $this->name = microtime();
+
+
+        $this->name = $this->file->getClientOriginalName();
         if ($this->path != $this->file->getClientOriginalName()) {
-            $this->path = $this->file->getClientOriginalName();
+            $this->path = uniqid().'.'.$this->file->getClientOriginalExtension();
         }
     }
 
@@ -129,7 +148,7 @@ class Picture
             mkdir($this->getUploadRootDir(), 0775, true);
         }
         $this->file->move(
-            $this->getUploadRootDir(), $file_name
+            $this->getUploadRootDir(), $this->path
         );
         $this->file = null;
     }
@@ -190,5 +209,9 @@ class Picture
     public function getPath()
     {
         return $this->path;
+    }
+
+    public function getUrl(){
+        return $this->getWebPath();
     }
 }

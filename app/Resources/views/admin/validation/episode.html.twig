@@ -3,7 +3,9 @@
 {% block validation_content %}
     <div class="col-xs-3">
         <p class="text-center">{{ episode.serie.name }}</p>
-        <img src="{{ episode.serie.picture[0].url }}" alt="{{ episode.serie.picture[0].alt }}" width="100%">
+        {% if episode.serie.picture %}
+            <img src="{{ asset(episode.serie.picture.url) }}" alt="{{ episode.serie.name }}" width="100%">
+        {% endif %}
     </div>
     <div class="col-xs-9">
         <h3><strong>{{ episode.name }}</strong></h3>

@@ -48,11 +48,11 @@ class SerieRepository extends EntityRepository
     public function getOneWithEpisodes($serieId){
         $query = $this->createQueryBuilder('serie')
             ->select('serie')
-            ->leftjoin('serie.episodes','episode')
+            ->leftJoin('serie.episodes','episode')
             ->addSelect('episode')
             ->join('serie.language','language')
             ->addSelect('language')
-            ->join('serie.picture','picture')
+            ->leftJoin('serie.picture','picture')
             ->addSelect('picture')
             ->where('serie.id = :id')
             ->andWhere('serie.validated= :is_validated')
