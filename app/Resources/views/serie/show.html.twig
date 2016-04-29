@@ -26,6 +26,10 @@
                     <h3>{{ serie.episodes|length }} <small>Episodes</small></h3>
                 </div>
             </div>
+             <div class="text-center col-sm-12" >
+            {% include 'DCSRatingBundle:Rating:rating.html.twig' with {'id' : serie.id} %}
+            {% include 'DCSRatingBundle:Rating:control.html.twig' with {'id' : serie.id} %}
+            </div>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <div class="col-xs-6">
                     <a href="{{ path('serie_edit', { 'id': serie.id }) }}" class="btn btn-warning btn-block bigger"><i class="fa fa-pencil"></i> Edit</a>

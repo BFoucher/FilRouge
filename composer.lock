@@ -4,9 +4,57 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5a04585613f045e1f232f8990c45fb08",
-    "content-hash": "8a5ae6f34079a481dbf5d6e6a9cc2aca",
+    "hash": "e8c6bf5c01ccface7854bee5171a5741",
+    "content-hash": "6285fd102e37760fb2e020ef285f02db",
     "packages": [
+        {
+            "name": "damianociarla/rating-bundle",
+            "version": "v1.2",
+            "target-dir": "DCS/RatingBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/damianociarla/DCSRatingBundle.git",
+                "reference": "48d78946309271c343adb3ef2c764b3838bd1408"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/damianociarla/DCSRatingBundle/zipball/48d78946309271c343adb3ef2c764b3838bd1408",
+                "reference": "48d78946309271c343adb3ef2c764b3838bd1408",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/symfony": "~2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "DCS\\RatingBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damiano Ciarla",
+                    "email": "damiano.ciarla@gmail.com",
+                    "homepage": "http://www.damianociarla.it/"
+                }
+            ],
+            "description": "This Bundle provides functionality for a rating system for Symfony2 applications",
+            "homepage": "https://github.com/damianociarla/DCSRatingBundle",
+            "keywords": [
+                "FOSUserBundle",
+                "Rating",
+                "Symfony2",
+                "fos",
+                "star",
+                "twig"
+            ],
+            "time": "2015-02-19 09:10:11"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.7",
