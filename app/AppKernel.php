@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Snc\RedisBundle\SncRedisBundle(),
             new AppBundle\AppBundle(),
+            new Tobiassjosten\TheTVDBBundle\TobiassjostenTheTVDBBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

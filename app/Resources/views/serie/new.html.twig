@@ -10,13 +10,70 @@
     <h1>Serie creation</h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+    {{ form_widget(form) }}
+    <input type="submit" value="Create" />
     {{ form_end(form) }}
 
+    <div id="tvdb_result"></div>
     <ul>
         <li>
             <a href="{{ path('serie_index') }}">Back to the list</a>
         </li>
     </ul>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script>
+
+        $('#serie_name').on('change',function(){
+            var serieName = $('#serie_name').val();
+
+            $.ajax({
+                        method: "GET",
+                        url: "/tvdb/series/"+serieName,
+                        beforeSend: function(){
+                            $('#tvdb_result').html('loading...');
+                        }
+                    })
+                    .done(function( msg ) {
+                        if (msg != '[]'){
+                            $('#tvdb_result').html('');
+                            var series = JSON.parse(msg);
+                            for (var i=0; i<series.length;i++){
+                                var serie = series[i];
+                                showSerie(serie);
+                            }
+                        }else{
+                            $('#tvdb_result').html('Aucun résultat trouvé sur TheTVDB');
+                        }
+
+                    });
+
+        });
+
+        function hydratSerie(serie){
+            return function(){
+                $('#serie_name').val(serie.name);
+                $('#serie_description').val(serie.overview);
+                $('#serie_thTvdbID').val(serie.id);
+                if (serie.language == 'fr'){
+                    $('#serie_language option[value="1"]').prop('selected', true);
+                }else{
+                    $('#serie_language option[value="2"]').prop('selected', true);
+                }
+
+            }
+        }
+
+        function showSerie(serie){
+            if (serie.bannerUrl){
+                $('#tvdb_result').append('<img src="'+serie.bannerUrl+'" height="60px" id="serie-'+serie.id+'-'+serie.language+'"><br />');
+
+            }else{
+                $('#tvdb_result').append('<div class="btn btn-lg btn-default" id="serie-'+serie.id+'-'+serie.language+'">'+serie.name+'</div><br />');
+            }
+            $('#serie-'+serie.id+'-'+serie.language).on('click',hydratSerie(serie));
+        }
+    </script>
 {% endblock %}
