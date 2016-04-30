@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use FOS\CommentBundle\Model\VotableCommentInterface;
 
 /**
-* @ORM\Entity
+* @ORM\Entity(repositoryClass="AppBundle\Repository\CommentRepository")
 * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
 */
 class Comment extends BaseComment implements SignedCommentInterface, VotableCommentInterface

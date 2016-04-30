@@ -1,45 +1,23 @@
 <div class="carousel slide" data-ride="carousel" role="listbox">
     <div class="carousel-inner">
-        <div class="item active">
+        {% for comment in lastComments %}
+            {% if loop.index%2 !=0 %}
+        <div class="item  {% if loop.first %}active{% endif %}">
             <div class="testimonials">
                 <div class="active item">
-                    <blockquote><p>Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.</p></blockquote>
+                    <blockquote><p>{{ comment.body }}</p></blockquote>
                     <div class="carousel-info">
                         <div class="col-sm-6">
-                            <img alt="" src="http://keenthemes.com/assets/bootsnipp/img1-small.jpg" class="pull-left">
+                            <img alt="" src="{{ asset(comment.author.avatar) }}" class="pull-left">
                             <div class="pull-left">
-                                <span class="testimonials-name">Lina Mars</span>
-                                <span class="testimonials-post">Commercial Director</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <img alt="" src="{{ asset('/uploads/75897-5.jpg') }}" class="pull-right">
-                            <div class="pull-right">
-                                <span class="testimonials-name">Serie 1</span>
-                                <span class="testimonials-post "><i class="fa fa-star  text-warning"></i><i class="fa fa-star  text-warning"></i><i class="fa fa-star  text-warning"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>   </span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="testimonials">
-                <div class="active item">
-                    <blockquote><p>Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.</p></blockquote>
-                    <div class="carousel-info">
-                        <div class="col-sm-6">
-                            <img alt="" src="{{ asset('/imgs/default_avatar.png') }}" class="pull-left">
-                            <div class="pull-left">
-                                <span class="testimonials-name">Lina Mars</span>
+                                <span class="testimonials-name">{{ comment.author.username }}</span>
                                 <span class="testimonials-post">Commercial Director</span>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <img alt="" src="{{ asset('/uploads/73255-24.jpg') }}" class="pull-right">
                             <div class="pull-right">
-                                <span class="testimonials-name">Serie 1</span>
+                                <span class="testimonials-name">{{ comment.Thread.id }}</span>
                                 <span class="testimonials-post"><i class="fa fa-star  text-warning"></i><i class="fa fa-star  text-warning"></i><i class="fa fa-star  text-warning"></i><i class="fa fa-star  text-warning"></i><i class="fa fa-star-half  text-warning"></i></span>
                             </div>
                         </div>
@@ -48,6 +26,8 @@
                 </div>
             </div>
         </div>
+        {% endif %}
+        {% endfor %}
     </div>
 </div>
 
