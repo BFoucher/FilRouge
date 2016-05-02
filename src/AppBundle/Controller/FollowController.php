@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\BrowserKit\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Follow controller.
@@ -18,6 +19,7 @@ class FollowController extends Controller
     /**
      * Follow or Unfollow a serie.
      *
+     * @Security("has_role('ROLE_USER')")
      * @Route("/serie/{serie}/follow", name="serie_follow")
      * @Method("GET")
      */

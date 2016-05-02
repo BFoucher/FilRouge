@@ -45,6 +45,7 @@ class UserController extends Controller
     /**
      * Show My Follows Series.
      *
+     * 
      * @Route("/{user}/follows", name="user_follows")
      * @Method("GET")
      */

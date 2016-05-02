@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\BrowserKit\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Watch controller.
@@ -19,6 +20,7 @@ class WatchController extends Controller
     /**
      * Watch or UnWatch an episode.
      *
+     * @Security("has_role('ROLE_USER')")
      * @Route("/episode/{episode}/watch", name="episode_watch")
      * @Method("GET")
      */

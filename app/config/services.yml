@@ -2,6 +2,7 @@
 # http://symfony.com/doc/current/book/service_container.html
 parameters:
 #    parameter_name: value
+    #app.comments.vote_persistence_listener.class: AppBundle\EventListener\CommentVotePersistenceListener
 
 services:
 #    service_name:
@@ -18,4 +19,9 @@ services:
                 class: AppBundle\Form\ProfileType
                 tags:
                     - { name: form.type, alias: app_user_profile }
+    #acme.comments.vote_persistence_listener:
+       # class: %app.comments.vote_persistence_listener.class%
+        #arguments: [ @fos_comment.manager.vote.default, @security.context ]
+        #tags:
+            #- { name: kernel.event_subscriber }
 

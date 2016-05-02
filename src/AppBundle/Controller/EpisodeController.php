@@ -8,10 +8,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Episode;
 use AppBundle\Form\EpisodeType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Episode controller.
  *
+ * 
  * @Route("/episode")
  */
 class EpisodeController extends Controller
@@ -36,6 +38,7 @@ class EpisodeController extends Controller
     /**
      * Creates a new Episode entity.
      *
+     * @Security("has_role('ROLE_USER')")
      * @Route("/new", name="episode_new")
      * @Method({"GET", "POST"})
      */
@@ -104,6 +107,7 @@ class EpisodeController extends Controller
 
     /**
      * Deletes a Episode entity.
+     * @Security("has_role('ROLE_MODERATOR')")
      *
      * @Route("/{id}", name="episode_delete")
      * @Method("DELETE")

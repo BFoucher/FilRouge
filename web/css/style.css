@@ -1,0 +1,47 @@
+.style1{
+	height: 20px;
+}
+.btn-block{
+	margin: 20px;
+
+}
+.btn-warning{
+	margin: 0px;
+	padding: 5px;
+
+}
+
+
+        .rand-poster{
+            position: relative;
+            padding-top: 40px;
+            height: 250px;
+            overflow:hidden;
+            z-index: 2;
+        }
+        .rand-poster figure{
+            position: absolute;
+            margin-right: -15px;
+            transform: rotate(8deg);
+            z-index: 2;
+            transition: 0.3s;
+        }
+        .rand-poster img{
+            max-height: 150px;
+            width: 100px;
+        }
+        .rand-poster img:hover{
+            position: inherit;
+        }
+        .rand-poster figure:nth-child(2n+0){
+            transform: rotate(-7deg);
+        }
+        .rand-poster figure:nth-child(4n+1){
+            transform: rotate(16deg);
+        }
+        .rand-poster figure:hover{
+            transform: rotate(0deg);
+            transform: scale(1.5);
+            z-index: 3;
+
+ 

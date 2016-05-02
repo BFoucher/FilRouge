@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Snc\RedisBundle\Client\Predis;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Tchat controller.
@@ -48,6 +49,7 @@ class TchatController extends Controller
 
     /**
      * Post a Message
+     * @Security("has_role('ROLE_USER')")
      *
      * @Route("/tchat", name="tchat_post")
      * @Method("POST")

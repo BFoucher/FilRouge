@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 /**
@@ -42,6 +43,7 @@ class SerieController extends Controller
     /**
      * Creates a new Serie entity.
      *
+     * @Security("has_role('ROLE_MODERATOR')")
      * @Route("/new", name="serie_new")
      * @Method({"GET", "POST"})
      */
@@ -118,6 +120,7 @@ class SerieController extends Controller
     /**
      * Deletes a Serie entity.
      *
+     * @Security("has_role('ROLE_USER')")
      * @Route("/{id}", name="serie_delete")
      * @Method("DELETE")
      */

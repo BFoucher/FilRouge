@@ -6,9 +6,12 @@
 {% endblock %}
 
 {% block body %}
+    <p>
     <div class="col-xs-12">
-        <a href="{{ path('serie_index') }}" class="btn btn-primary btn-lg">Back to the list</a>
+        <a href="{{ path('serie_index') }}" class="btn btn-primary btn-lg ">Back to the list</a>
     </div>
+    </p>
+    <div class="style1"></div>
     <div class="row">
         <div class="col-xs-12 col-sm-3">
             <div class="thumbnail">
@@ -32,13 +35,13 @@
             </div>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <div class="col-xs-6">
-                    <a href="{{ path('serie_edit', { 'id': serie.id }) }}" class="btn btn-warning btn-block bigger"><i class="fa fa-pencil"></i> Edit</a>
+                    <a href="{{ path('serie_edit', { 'id': serie.id }) }}" class="btn btn-warning btn-block medium"><i class="fa fa-pencil"></i> Edit</a>
                 </div>
                 <div class="col-xs-6">
                     {% if app.user.isFollow(serie) %}
-                        <a href="{{ path('serie_follow',{'serie':serie.id}) }}" class="btn btn-info btn-block bigger"><i class="fa fa-eye-slash"></i> UnFollow</a>
+                        <a href="{{ path('serie_follow',{'serie':serie.id}) }}" class="btn btn-info btn-block medium"><i class="fa fa-eye-slash"></i> UnFollow</a>
                     {% else %}
-                        <a href="{{ path('serie_follow',{'serie':serie.id}) }}" class="btn btn-primary btn-block bigger"><i class="fa fa-eye"></i> Follow</a>
+                        <a href="{{ path('serie_follow',{'serie':serie.id}) }}" class="btn btn-primary btn-block medium><i class="fa fa-eye"></i> Follow</a>
                     {% endif %}
                 </div>
             {% endif %}
