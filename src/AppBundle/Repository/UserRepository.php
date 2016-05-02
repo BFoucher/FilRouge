@@ -12,6 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+    public function getAll(){
+        $query = $this->createQueryBuilder('u')
+            ->select('u')
+            ->leftJoin('u.watch','episode')
+            ->addSelect('episode')
+            ->orderBy('u.username', 'ASC')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
     public function getLastUsers($nb = 2){
         $query = $this->createQueryBuilder('u')
             ->select('u')

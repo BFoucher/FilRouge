@@ -16,17 +16,17 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $lastSeries = $em->getRepository('AppBundle:Serie')->getLastSerie();
-        //TODO: Create a random search in Repo, only need poster & serie Id
         $randPoster = $em->getRepository('AppBundle:Serie')->getLastSerie(30);
-        $lastEpisodes = $em->getRepository('AppBundle:Episode')->getLastepisode();
+        shuffle($randPoster);
+        $lastComments = $em->getRepository('AppBundle:Comment')->getLastComments();
         $lastTchatMessages = $em->getRepository('AppBundle:Tchat')->getLast();
         $newMessage = new Tchat();
         $newTchatMessage = $this->createForm('AppBundle\Form\TchatType',$newMessage);
-
+        dump($lastComments);
         return $this->render('wall/wall.html.twig',[
             'lastSeries' => $lastSeries,
-            'lastEpisodes' => $lastEpisodes,
             'posters' =>$randPoster,
+            'lastComments' => $lastComments,
             'messages' => $lastTchatMessages,
             'form' => $newTchatMessage->createView()
         ]);

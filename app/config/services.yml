@@ -11,6 +11,9 @@ services:
     app.validator:
         class: AppBundle\Utils\NotValidated
         arguments: [@doctrine.orm.entity_manager]
+    app.get.this:
+            class: AppBundle\Utils\WhatIsThis
+            arguments: [@doctrine.orm.entity_manager]
     app.form.registration:
             class: AppBundle\Form\RegistrationType
             tags:

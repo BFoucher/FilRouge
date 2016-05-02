@@ -24,6 +24,8 @@ class SerieRepository extends EntityRepository
     public function getAll(){
         $query = $this->createQueryBuilder('serie')
             ->select('serie')
+            ->leftJoin('serie.picture','picture')
+            ->addSelect('picture')
             ->orderBy('serie.name','ASC')
             ->where('serie.validated= :is_validated' )
             ->setParameter(':is_validated',true)
@@ -69,6 +71,8 @@ class SerieRepository extends EntityRepository
         $query = $this->createQueryBuilder('serie')
             ->select('serie')
             ->orderBy('serie.id', 'DESC')
+            ->leftJoin('serie.picture','picture')
+            ->addSelect('picture')
             ->andWhere('serie.validated= :is_validated')
             ->setParameter(':is_validated',$validated)
             ->setMaxResults($nb)
@@ -93,31 +97,5 @@ class SerieRepository extends EntityRepository
 
         return $query->getResult();
     }
-
-    public function searchRand(){
-
-   // $query = mysql_query("select * from recherche order by rand() limit 1");
-   // $rep = mysql_fetch_array($query);
-            $query = $this->createQueryBuilder('serie')
-            ->select('serie.id')
-            ->where('serie.validated= :is_validated' )
-            ->setParameter(':is_validated',true)
-            ->getQuery();
-
-            return $query -> getResult();
-            
-        }
-
-        
-
-
-
-
-
-    /*$liste_id = $bdd->query('SELECT id FROM series')->fetchAll();
-    $id_aleatoire = $liste_id[shuffle($liste_id, 1)]['id'];
-    $all = $bdd->query('SELECT * FROM series WHERE id = '.$id_aleatoire);
-    }*/
-
 
 }
