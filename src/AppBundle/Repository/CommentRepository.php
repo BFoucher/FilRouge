@@ -18,7 +18,6 @@ class CommentRepository extends EntityRepository
             ->addSelect('user')
             ->join('AppBundle:Serie','serie')
             ->where('comment.thread = serie.id')
-            ->addSelect('serie')
             ->getQuery();
 
         return $query->getResult();

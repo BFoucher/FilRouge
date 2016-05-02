@@ -37,6 +37,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         validator: "@app.validator"
+        helpSerie : "@app.get.this"
 
 # Doctrine Configuration
 doctrine:
