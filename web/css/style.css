@@ -39,9 +39,10 @@
         .rand-poster figure:nth-child(4n+1){
             transform: rotate(16deg);
         }
-        .rand-poster figure:hover{
+        .rand-poster figure:hover {
             transform: rotate(0deg);
             transform: scale(1.5);
             z-index: 3;
+        }
 
  

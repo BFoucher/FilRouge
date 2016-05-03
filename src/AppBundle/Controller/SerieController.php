@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Serie;
@@ -13,7 +14,6 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 /**
@@ -45,6 +45,7 @@ class SerieController extends Controller
      *
      * @Security("has_role('ROLE_MODERATOR')")
      * @Route("/new", name="serie_new")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
