@@ -123,7 +123,7 @@ class EpisodeController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('episode_index');
+        return $this->redirectToRoute('serie_show');
     }
 
     /**

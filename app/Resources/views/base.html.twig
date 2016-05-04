@@ -16,6 +16,9 @@
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
+<header>
+</header>
+
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         {# Brand & Toggle  #}
@@ -31,7 +34,6 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ path('homepage') }}">Accueil <span class="sr-only">(current)</span></a></li>
                 <li><a href="{{ path('serie_index') }}">Series</a></li>
-                <li><a href="{{ path('episode_index') }}">Episodes</a></li>
                 <li><a href="{{ path('user_list') }}">Membres</a></li>
             </ul>
             {# search #}

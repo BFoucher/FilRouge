@@ -1,17 +1,6 @@
-.style1{
-	height: 20px;
-}
-.btn-block{
-	margin: 20px;
-
-}
-.btn-warning{
-	margin: 0px;
-	padding: 5px;
-
-}
 
 
+/*POSTER*/
         .rand-poster{
             position: relative;
             padding-top: 40px;
@@ -43,5 +32,23 @@
             transform: rotate(0deg);
             transform: scale(1.5);
             z-index: 3;
+        }
 
- 
+/* FORM */
+
+.serie-form{
+	background-color: white;
+	padding: 30px;
+
+}
+
+.form-text{
+	padding-top: 20px;
+}
+
+.back{
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+

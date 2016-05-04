@@ -6,11 +6,11 @@
 {% endblock %}
 
 {% block body %}
-    <p>
+<div class ="back">
     <div class="col-xs-12">
-        <a href="{{ path('serie_index') }}" class="btn btn-primary btn-lg ">Back to the list</a>
+        <a href="{{ path('serie_index') }}" id = "back" class="btn btn-primary">Back to the list</a>
     </div>
-    </p>
+</div>
     <div class="style1"></div>
     <div class="row">
         <div class="col-xs-12 col-sm-3">
@@ -41,7 +41,7 @@
                     {% if app.user.isFollow(serie) %}
                         <a href="{{ path('serie_follow',{'serie':serie.id}) }}" class="btn btn-info btn-block medium"><i class="fa fa-eye-slash"></i> UnFollow</a>
                     {% else %}
-                        <a href="{{ path('serie_follow',{'serie':serie.id}) }}" class="btn btn-primary btn-block medium><i class="fa fa-eye"></i> Follow</a>
+                        <a href="{{ path('serie_follow',{'serie':serie.id}) }}" class="btn btn-primary btn-block medium"><i class="fa fa-eye"></i> Follow</a>
                     {% endif %}
                 </div>
             {% endif %}
@@ -98,9 +98,15 @@
                                         <a href="{{ path('episode_watch',{'episode':episode.id}) }}">
                                             <span class="btn btn-info pull-right"><i class="fa fa-eye-slash"></i></span>
                                         </a>
+                                        <a href="{{ path('episode_delete',{'id':episode.id}) }}">
+                                            <span class="btn btn-danger pull-right"><i class="fa fa-bomb"></i></span>
+                                        </a>
                                     {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                                         <a href="{{ path('episode_watch',{'episode':episode.id}) }}">
                                             <span class="btn btn-primary pull-right"><i class="fa fa-eye"></i></span>
+                                        </a>
+                                        <a href="{{ path('episode_delete',{'id':episode.id}) }}">
+                                            <span class="btn btn-danger pull-right"><i class="fa fa-bomb"></i></span>
                                         </a>
                                     {% endif %}
                                 </td>
