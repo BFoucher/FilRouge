@@ -31,8 +31,8 @@ Feature: Show homepage
   Scenario: User can't go to Admin Section
     Given I am logged in as User
     And I go to "/admin"
-    Then I should see "403 Forbidden"
-    But I should not see "Espace Admin"
+    Then the response status code should be 403
+    And I should see "403 Forbidden"
 
   Scenario: Admin can go to Admin Section
     Given I am logged in as Administrator
