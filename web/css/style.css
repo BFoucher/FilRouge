@@ -28,7 +28,7 @@
         .rand-poster figure:nth-child(4n+1){
             transform: rotate(16deg);
         }
-        .rand-poster figure:hover{
+        .rand-poster figure:hover {
             transform: rotate(0deg);
             transform: scale(1.5);
             z-index: 3;
@@ -50,5 +50,19 @@
 	padding-top: 30px;
 	padding-bottom: 30px;
 }
+
+.style1{
+	padding-top: 30px;
+}
+
+/*SERIE*/
+
+table, table tbody, table tbody tr, table tbody tr td{
+            min-width: 100%;
+            display: table;
+        }
+table tbody tr td{
+            min-height: 30px !important;
+        }
 
 

@@ -95,7 +95,7 @@ class EpisodeController extends Controller
             $em->persist($episode);
             $em->flush();
 
-            return $this->redirectToRoute('episode_edit', array('id' => $episode->getId()));
+            return $this->redirectToRoute('serie_show', array('id' => $episode->getId()));
         }
 
         return $this->render('episode/edit.html.twig', array(

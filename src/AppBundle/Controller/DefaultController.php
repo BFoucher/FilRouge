@@ -22,7 +22,6 @@ class DefaultController extends Controller
         $lastTchatMessages = $em->getRepository('AppBundle:Tchat')->getLast();
         $newMessage = new Tchat();
         $newTchatMessage = $this->createForm('AppBundle\Form\TchatType',$newMessage);
-        dump($lastComments);
         return $this->render('wall/wall.html.twig',[
             'lastSeries' => $lastSeries,
             'posters' =>$randPoster,
