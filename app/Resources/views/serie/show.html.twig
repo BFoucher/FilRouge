@@ -7,34 +7,68 @@
 
 {% block body %}
     <div class="col-xs-12">
-        <a href="{{ path('serie_index') }}" class="btn btn-primary btn-lg">Back to the list</a>
+        <div id="return">
+        <a href="{{ path('serie_index') }}" class="btn btn-primary">Back to the list</a>
+        </div>
     </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-3">
-            <div class="thumbnail">
+    <div class="row">   
                 {% if serie.picture %}
-                    <img src="{{ asset(serie.picture.url) }}" alt="{{ serie.name }}" />
+                    <img class="col-xs-3" src="{{ asset(serie.picture.url) }}" alt="{{ serie.name }}" />
                 {% endif %}
+            
+    <div class="col-xs-7 col-sm-5">
+            <p class="text-center block biggest"><strong>{{ serie.name }}</strong></p>
+    </div>
+        
+    <div class="col-xs-2 col-sm-2">
+            <div class="block badger-right badger-inverse box-primary text-center" data-badger="Language" >
+                <span class="bigger"> {{ serie.language.sName }}</span>
+           </div>
+        
+        </div>
+    
+
+        <div class="col-xs-10 col-sm-7">
+            <div class="block badger-left badger-inverse" data-badger="Description">
+                <p class="description">{{ serie.description }}</p>
             </div>
-            <div class="text-center col-xs-6" >
+        </div>
+     <div class="col-sm-7">
+                        <div class="list-group">
+                            {% for i in 1..nbSaisons %}
+                                <a href="#saison-{{ i }}" id="#saison-{{ i }}-tab" data-toggle="tab" aria-controls="saison-{{ i }}">
+                                    <button type="button" class="list-group-item">Saison {{ i }} <span class="label label-info pull-right">0/18</span></button>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>       
+        <div class="col-sm-9 col-sm-8">
+         <div class="col-sm-9 col-sm-5">
+             <div class="text-center col-sm-10" >
+            {% include 'DCSRatingBundle:Rating:rating.html.twig' with {'id' : serie.id} %}
+            {% include 'DCSRatingBundle:Rating:control.html.twig' with {'id' : serie.id} %}
+            </div>
+            </div>
+        </div>
+            
+            <div class="row">
+            <div class="text-center col-xs-5" >
                 <div class="block">
                     <h3>{{ nbSaisons }} <small>Saisons</small></h3>
                 </div>
             </div>
-            <div class="text-center col-xs-6" >
+            <div class="text-center col-xs-5" >
                 <div class="block">
                     <h3>{{ serie.episodes|length }} <small>Episodes</small></h3>
                 </div>
             </div>
-             <div class="text-center col-sm-12" >
-            {% include 'DCSRatingBundle:Rating:rating.html.twig' with {'id' : serie.id} %}
-            {% include 'DCSRatingBundle:Rating:control.html.twig' with {'id' : serie.id} %}
-            </div>
+        </div>
+       
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <div class="col-xs-6">
+                <div class="col-xs-3">
                     <a href="{{ path('serie_edit', { 'id': serie.id }) }}" class="btn btn-warning btn-block bigger"><i class="fa fa-pencil"></i> Edit</a>
                 </div>
-                <div class="col-xs-6">
+                <div class="col-xs-3">
                     {% if app.user.isFollow(serie) %}
                         <a href="{{ path('serie_follow',{'serie':serie.id}) }}" class="btn btn-info btn-block bigger"><i class="fa fa-eye-slash"></i> UnFollow</a>
                     {% else %}
@@ -43,39 +77,18 @@
                 </div>
             {% endif %}
             {% if is_granted('ROLE_MODERATOR') %}
-                <div class="col-xs-6">
+                <div class="col-xs-3">
                     {{ form_start(delete_form) }}
-                    <input type="submit" value="Delete" class="btn btn-danger btn">
+                    <div id ="delete-serie">
+                    <input type="submit" value="Delete" class="btn btn-danger btn-block bigger">
+                    </div>
                     {{ form_end(delete_form) }}
-                </div>
+                    </div>
             {% endif %}
 
-        </div>
-        <div class="col-xs-12 col-sm-7">
-            <p class="text-center block biggest"><strong>{{ serie.name }}</strong></p>
-        </div>
-        <div class="col-xs-12 col-sm-2 ">
-            <div class="block badger-right badger-inverse box-primary text-center" data-badger="Language" >
-                <span class="bigger"> {{ serie.language.sName }}</span>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-9">
-            <div class="block badger-left badger-inverse" data-badger="Description">
-                <p class="description">{{ serie.description }}</p>
-            </div>
-        </div>
-        <div class="hidden-xs col-sm-9">
+        
+        <div class="hidden-xs col-sm-10">
             <div class="block" >
-                <div class="row">
-                    <div class="col-sm-2">
-                        <div class="list-group">
-                            {% for i in 1..nbSaisons %}
-                                <a href="#saison-{{ i }}" id="#saison-{{ i }}-tab" data-toggle="tab" aria-controls="saison-{{ i }}">
-                                    <button type="button" class="list-group-item">Saison {{ i }} <span class="label label-info pull-right">0/18</span></button>
-                                </a>
-
-                            {% endfor %}
-                        </div>
                     </div>
                     <div class="col-sm-10">
                         <div id="myTabContent" class="tab-content">
