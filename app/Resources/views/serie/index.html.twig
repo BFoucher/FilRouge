@@ -3,8 +3,8 @@
     <a href="#" class="btn btn-bc">Séries</a>
 {% endblock %}
 {% block body %}
-    <h1>Serie list</h1>
-    <p><a href="{{ path('serie_new') }}" class="btn btn-primary btn-bg">Create a new entry</a></p>
+    <h1>Liste des séries</h1>
+    <p><a href="{{ path('serie_new') }}" class="btn btn-primary btn-bg">Créer une nouvelle série</a></p>
     <div class="row">
         {% for serie in series %}
         <a href="{{ path('serie_show', { 'serieId': serie.id }) }}">

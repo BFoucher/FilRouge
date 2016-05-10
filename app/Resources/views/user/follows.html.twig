@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block breadcrumbs %}
-    <a href="{{ path('user_list') }}" class="btn btn-bc">User</a>
+    <a href="{{ path('user_list') }}" class="btn btn-bc">Membres</a>
     <a href="{{ path('user_profile',{'user':user.id}) }}" class="btn btn-bc">{{ user.username }}</a>
     <a href="#" class="btn btn-bc">Follows</a>
 

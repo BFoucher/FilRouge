@@ -65,4 +65,8 @@ table tbody tr td{
             min-height: 30px !important;
         }
 
+/*USER*/
 
+.paddinguser{
+    padding-top: 30px;
+}
