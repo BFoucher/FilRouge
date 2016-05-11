@@ -45,7 +45,7 @@ class SerieController extends Controller
      *
      * @Security("has_role('ROLE_MODERATOR')")
      * @Route("/new", name="serie_new")
-     * @Security("has_role('ROLE_ADMIN')")
+     *
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)

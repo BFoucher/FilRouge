@@ -1,14 +1,14 @@
 {% extends '::base.html.twig' %}
 
 {% block breadcrumbs %}
-    <a href="{{ path('user_list') }}" class="btn btn-bc">User</a>
+    <a href="{{ path('user_list') }}" class="btn btn-bc">Membres</a>
     <a href="#" class="btn btn-bc">{{ user.username }}</a>
 {% endblock %}
 
 
 {% block body %}
     <div class="row">
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6 paddinguser ">
             <div class="well profile">
                 <div class="col-sm-12">
                     <div class="col-xs-12 col-sm-8">
@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-3 emphasis">
                         <h2><strong>137</strong></h2>
-                        <p><small>Likes/Dislikes</small></p>
+                        <p><small>J'aime/J'aime pas</small></p>
                     </div>
                 </div>
             </div>

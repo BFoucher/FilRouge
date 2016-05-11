@@ -1,17 +1,6 @@
-.style1{
-	height: 20px;
-}
-.btn-block{
-	margin: 20px;
-
-}
-.btn-warning{
-	margin: 0px;
-	padding: 5px;
-
-}
 
 
+/*POSTER*/
         .rand-poster{
             position: relative;
             padding-top: 40px;
@@ -45,4 +34,39 @@
             z-index: 3;
         }
 
- 
+/* FORM */
+
+.serie-form{
+	background-color: white;
+	padding: 30px;
+
+}
+
+.form-text{
+	padding-top: 20px;
+}
+
+.back{
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.style1{
+	padding-top: 30px;
+}
+
+/*SERIE*/
+
+table, table tbody, table tbody tr, table tbody tr td{
+            min-width: 100%;
+            display: table;
+        }
+table tbody tr td{
+            min-height: 30px !important;
+        }
+
+/*USER*/
+
+.paddinguser{
+    padding-top: 30px;
+}

@@ -6,12 +6,12 @@
 {% endblock %}
 
 {% block body %}
-    <p>
+<div class ="back">
     <div class="col-xs-12">
-        <a href="{{ path('serie_index') }}" class="btn btn-primary btn-lg ">Back to the list</a>
+        <a href="{{ path('serie_index') }}" id = "back" class="btn btn-primary">Retour à la liste</a>
     </div>
-    </p>
-    <div class="style1"></div>
+</div>
+    <div class="style1">
     <div class="row">
         <div class="col-xs-12 col-sm-3">
             <div class="thumbnail">
@@ -35,23 +35,27 @@
             </div>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <div class="col-xs-6">
-                    <a href="{{ path('serie_edit', { 'id': serie.id }) }}" class="btn btn-warning btn-block medium"><i class="fa fa-pencil"></i> Edit</a>
+                    <a href="{{ path('serie_edit', { 'id': serie.id }) }}" class="btn btn-warning btn-block medium"><i class="fa fa-pencil"></i> Editer</a>
+                </div>
+                <div class="col-xs-6">
+                    <a href="{{ path('episode_new', { 'id': serie.id }) }}" class="btn btn-info btn-block medium"><i class="fa fa-pencil"></i> Nouvel</br> épisode</a>
                 </div>
                 <div class="col-xs-6">
                     {% if app.user.isFollow(serie) %}
-                        <a href="{{ path('serie_follow',{'serie':serie.id}) }}" class="btn btn-info btn-block medium"><i class="fa fa-eye-slash"></i> UnFollow</a>
+                        <a href="{{ path('serie_follow',{'serie':serie.id}) }}" class="btn btn-info btn-block medium"><i class="fa fa-eye-slash"></i> Ne plus suivre</a>
                     {% else %}
-                        <a href="{{ path('serie_follow',{'serie':serie.id}) }}" class="btn btn-primary btn-block medium><i class="fa fa-eye"></i> Follow</a>
+                        <a href="{{ path('serie_follow',{'serie':serie.id}) }}" class="btn btn-primary btn-block medium"><i class="fa fa-eye"></i> Suivre</a>
                     {% endif %}
                 </div>
             {% endif %}
             {% if is_granted('ROLE_MODERATOR') %}
                 <div class="col-xs-6">
                     {{ form_start(delete_form) }}
-                    <input type="submit" value="Delete" class="btn btn-danger btn">
+                    <input type="submit" value="Supprimer" class="btn btn-danger btn-block medium">
                     {{ form_end(delete_form) }}
                 </div>
             {% endif %}
+            
 
         </div>
         <div class="col-xs-12 col-sm-7">
@@ -80,6 +84,7 @@
                             {% endfor %}
                         </div>
                     </div>
+                    
                     <div class="col-sm-10">
                         <div id="myTabContent" class="tab-content">
                             {% set current_saison = -1 %}
@@ -98,9 +103,15 @@
                                         <a href="{{ path('episode_watch',{'episode':episode.id}) }}">
                                             <span class="btn btn-info pull-right"><i class="fa fa-eye-slash"></i></span>
                                         </a>
+                                        <a href="{{ path('episode_edit',{'id':episode.id}) }}">
+                                            <span class="btn btn-warning pull-right"><i class="glyphicon glyphicon-edit"></i></span>
+                                        </a>
                                     {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                                         <a href="{{ path('episode_watch',{'episode':episode.id}) }}">
                                             <span class="btn btn-primary pull-right"><i class="fa fa-eye"></i></span>
+                                        </a>
+                                        <a href="{{ path('episode_edit',{'id':episode.id}) }}">
+                                            <span class="btn btn-warning pull-right"><i class="glyphicon glyphicon-edit"></i></span>
                                         </a>
                                     {% endif %}
                                 </td>
@@ -113,6 +124,7 @@
             </div>
         </div>
     </div>
+</div>
     <div class="row">
         <div class="col-xs-12">
 
@@ -125,17 +137,5 @@
             </div>
         </div>
     </div>
-
-    <style>
-
-        table, table tbody, table tbody tr, table tbody tr td{
-            min-width: 100%;
-            display: table;
-        }
-        table tbody tr td{
-            min-height: 30px !important;
-        }
-
-    </style>
 
 {% endblock %}

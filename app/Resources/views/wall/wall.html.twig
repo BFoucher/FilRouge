@@ -1,6 +1,7 @@
 {% extends '::base.html.twig' %}
 {% block breadcrumbs %}
-    <a href="#" class="btn btn-bc">Dashboard</a>
+    <a href="#" class="btn btn-bc">
+tableau de bord</a>
 {% endblock %}
 
 {% block body %}
@@ -22,15 +23,15 @@
         </div>
 
         <div class="col-xs-12 col-sm-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="panel panel-warning">
+                <div id ="1" class="panel-heading">
                     <h3 class="panel-title">L'Actus de mes séries :</h3>
                 </div>
                 <div class="panel-body text-center">
                     {% include '::/wall/last_episodes.html.twig' %}
                 </div>
             </div>
-            <div class="panel panel-warning">
+            <div class="panel panel-danger">
                 <div class="panel-heading">
                     <h3 class="panel-title">Ils ont commenté :</h3>
                 </div>
@@ -40,7 +41,7 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3" id="chat">
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">On en parle:</h3>
                 </div>

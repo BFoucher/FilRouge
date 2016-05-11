@@ -20,7 +20,6 @@ class EpisodeType extends AbstractType
             ->add('saison')
             ->add('episodeNumber')
             ->add('validated')
-            ->add('serie')
             ->add('language')
             ->add('author')
         ;
