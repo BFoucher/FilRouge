@@ -88,7 +88,7 @@ class Serie
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -111,7 +111,7 @@ class Serie
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -134,7 +134,7 @@ class Serie
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -157,7 +157,7 @@ class Serie
     /**
      * Get thTvdbID
      *
-     * @return integer 
+     * @return integer
      */
     public function getThTvdbID()
     {
@@ -180,7 +180,7 @@ class Serie
     /**
      * Get validated
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getValidated()
     {
@@ -213,7 +213,7 @@ class Serie
     /**
      * Get episodes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEpisodes()
     {
@@ -236,7 +236,7 @@ class Serie
     /**
      * Get picture
      *
-     * @return \AppBundle\Entity\Picture 
+     * @return \AppBundle\Entity\Picture
      */
     public function getPicture()
     {
@@ -259,7 +259,7 @@ class Serie
     /**
      * Get language
      *
-     * @return \AppBundle\Entity\Language 
+     * @return \AppBundle\Entity\Language
      */
     public function getLanguage()
     {
@@ -282,7 +282,7 @@ class Serie
     /**
      * Get author
      *
-     * @return \AppBundle\Entity\User 
+     * @return \AppBundle\Entity\User
      */
     public function getAuthor()
     {

@@ -43,7 +43,7 @@ class SerieController extends Controller
     /**
      * Creates a new Serie entity.
      *
-     * @Security("has_role('ROLE_MODERATOR')")
+     * @Security("has_role('ROLE_USER')")
      * @Route("/new", name="serie_new")
      *
      * @Method({"GET", "POST"})
