@@ -17,11 +17,8 @@ class SerieType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('thTvdbID')
-            ->add('validated')
             ->add('picture', new PictureType())
             ->add('language')
-            ->add('author')
         ;
     }
     

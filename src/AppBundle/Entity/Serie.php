@@ -40,14 +40,14 @@ class Serie
      *
      * @ORM\Column(name="thTvdbID", type="integer")
      */
-    private $thTvdbID;
+    private $thTvdbID=0;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="validated", type="boolean")
      */
-    private $validated;
+    private $validated=0;
 
     /**
     * @var string

@@ -54,7 +54,7 @@ class Episode
      *
      * @ORM\Column(name="validated", type="boolean")
      */
-    private $validated;
+    private $validated=0;
 
     /**
      * @ORM\ManyToOne(targetEntity="Serie",inversedBy="episodes")

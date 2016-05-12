@@ -50,6 +50,7 @@ class SerieController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         $serie = new Serie();
         $form = $this->createForm('AppBundle\Form\SerieType', $serie);
         $form->handleRequest($request);
@@ -77,6 +78,8 @@ class SerieController extends Controller
     public function showAction($serieId)
     {
         $em = $this->getDoctrine()->getManager();
+    
+
         $serie = $em->getRepository('AppBundle:Serie')->getOneWithEpisodes($serieId);
         //$serie = $em->getRepository('AppBundle:Serie')->find($serieId);
         $nbSaisons = $em->getRepository('AppBundle:Episode')->countNumberSaison($serieId);
@@ -98,7 +101,9 @@ class SerieController extends Controller
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Serie $serie)
+
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         $deleteForm = $this->createDeleteForm($serie);
         $editForm = $this->createForm('AppBundle\Form\SerieType', $serie);
         $editForm->handleRequest($request);
@@ -127,6 +132,7 @@ class SerieController extends Controller
      */
     public function deleteAction(Request $request, Serie $serie)
     {
+
         $form = $this->createDeleteForm($serie);
         $form->handleRequest($request);
 
@@ -156,3 +162,4 @@ class SerieController extends Controller
     }
 
 }
+

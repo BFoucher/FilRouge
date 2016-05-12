@@ -3,7 +3,7 @@
 {% block body %}
     <div class ="back">
     <div class="col-xs-12">
-        <a href="{{ path('serie_index') }}" id = "back" class="btn btn-primary">Back to the list</a>
+        <a href="{{ path('serie_index') }}" id = "back" class="btn btn-primary">Retour à la liste</a>
     </div>
     </div>
     <h1>Episode edit</h1>
@@ -41,24 +41,10 @@
     </div>
     <div>
         <div class= "form-text">
-            {{ form_label(edit_form.validated) }}
-        </div>
-            {{ form_errors(edit_form.validated) }}
-            {{ form_widget(edit_form.validated) }}
-    </div>
-    <div>
-        <div class= "form-text">
             {{ form_label(edit_form.language) }}
         </div>
             {{ form_errors(edit_form.language) }}
             {{ form_widget(edit_form.language) }}
-    </div>
-    <div>
-        <div class= "form-text">
-            {{ form_label(edit_form.author) }}
-        </div>
-            {{ form_errors(edit_form.author) }}
-            {{ form_widget(edit_form.author) }}
     </div>
     <div class ="back">
     <input type="submit" class="btn btn-primary" value="Edit" />

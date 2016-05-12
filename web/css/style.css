@@ -1,4 +1,12 @@
+/*FONT*/
+@font-face {
+    font-family: intro;
+    src: url(fonts/Intro.otf);
+}
+html{
+    font-family: intro;
 
+}
 
 /*POSTER*/
         .rand-poster{
@@ -33,6 +41,8 @@
             transform: scale(1.5);
             z-index: 3;
         }
+
+
 
 /* FORM */
 
@@ -69,4 +79,8 @@ table tbody tr td{
 
 .paddinguser{
     padding-top: 30px;
+}
+input[id="submit"] {
+    font-family: FontAwesome;
+    font-size: 1em;
 }
