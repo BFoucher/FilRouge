@@ -5,7 +5,7 @@
     <div class="row">
         {% if not user.enabled %}
             <p class="alert alert-danger text-danger text-center">
-                <strong><i class="fa fa-info"></i> Utilisteur Banni</strong>
+                <strong><i class="fa fa-info"></i> Utilisateur Banni</strong>
             </p>
         {% endif %}
         <div class="col-xs-6 col-sm-4 col-sm-offset-2">
@@ -31,7 +31,7 @@
     <div class="row">
         <div class="col-xs-6 text-right">
             {% if user.enabled %}
-                <a href="{{ path('admin_users_ban',{'user':user.id}) }}" class="btn btn-danger"><i class="fa fa-ban"></i> Bannir l'utilisateur</a>
+                <a href="{{ path('admin_users_ban',{'user':user.id}) }}" class="btn btn-danger style1"><i class="fa fa-ban"></i> Bannir l'utilisateur</a>
                 {% else %}
                 <a href="{{ path('admin_users_ban',{'user':user.id}) }}" class="btn btn-success"><i class="fa fa-gavel"></i> Debannir l'utilisateur</a>
             {% endif %}

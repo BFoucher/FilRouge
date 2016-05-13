@@ -34,10 +34,10 @@
             </div>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <div class="col-xs-6">
-                    <a href="{{ path('serie_edit', { 'id': serie.id }) }}" class="btn btn-warning btn-block medium"><i class="fa fa-pencil"></i> Editer</a>
+                    <a href="{{ path('serie_edit', { 'id': serie.id }) }}" class="btn btn-warning btn-block medium"><i class="fa fa-pencil-square-o"></i> Editer</a>
                 </div>
                 <div class="col-xs-6">
-                    <a href="{{ path('episode_new', { 'id': serie.id }) }}" class="btn btn-info btn-block medium"><i class="fa fa-pencil"></i> Nouvel</br> épisode</a>
+                    <a href="{{ path('episode_new', { 'id': serie.id }) }}" class="btn btn-info btn-block medium"><i class="fa fa-pencil"></i> Créer</br> épisode</a>
                 </div>
                 <div class="col-xs-6">
                     {% if app.user.isFollow(serie) %}
@@ -50,7 +50,7 @@
             {% if is_granted('ROLE_MODERATOR') %}
                 <div class="col-xs-6 ">
                     {{ form_start(delete_form) }}
-                    <input type="submit" id="submit" value="&#xf1e2; Supprimer" class="btn btn-danger btn-block search <medium></medium>">
+                    <input type="submit" id="submit" value="&#xf1f8; Supprimer" class="btn btn-danger btn-block search <medium></medium>">
                     {{ form_end(delete_form) }}
                 </div>
             {% endif %}
