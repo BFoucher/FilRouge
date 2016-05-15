@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Serie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -39,21 +40,24 @@ class EpisodeController extends Controller
      * Creates a new Episode entity.
      *
      * @Security("has_role('ROLE_USER')")
-     * @Route("/new", name="episode_new")
+     * @Route("/{serie}/new", name="episode_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request,Serie $serie)
     {
         $episode = new Episode();
         $form = $this->createForm('AppBundle\Form\EpisodeType', $episode);
         $form->handleRequest($request);
+
+        $episode->setSerie($serie);
+        $episode->setAuthor($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($episode);
             $em->flush();
 
-            return $this->redirectToRoute('episode_show', array('id' => $episode->getId()));
+            return $this->redirectToRoute('serie_show', array('serieId' => $episode->getSerie()->getId()));
         }
 
         return $this->render('episode/new.html.twig', array(

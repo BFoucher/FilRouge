@@ -37,7 +37,7 @@
                         <a href="{{ path('serie_edit', { 'id': serie.id }) }}" class="btn btn-warning btn-block medium"><i class="fa fa-pencil-square-o"></i> Editer</a>
                     </div>
                     <div class="col-xs-6">
-                        <a href="{{ path('episode_new', { 'id': serie.id }) }}" class="btn btn-info btn-block medium"><i class="fa fa-pencil"></i> Créer</br> épisode</a>
+                        <a href="{{ path('episode_new', { 'serie': serie.id }) }}" class="btn btn-info btn-block medium"><i class="fa fa-pencil"></i> Créer</br> épisode</a>
                     </div>
                     <div class="col-xs-6">
                         {% if app.user.isFollow(serie) %}
