@@ -66,11 +66,6 @@ html{
 }
 
 /*SERIE*/
-
-table, table tbody, table tbody tr, table tbody tr td{
-            min-width: 100%;
-            display: table;
-        }
 table tbody tr td{
             min-height: 30px !important;
         }
