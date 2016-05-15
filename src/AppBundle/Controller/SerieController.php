@@ -50,10 +50,10 @@ class SerieController extends Controller
      */
     public function newAction(Request $request)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
         $serie = new Serie();
         $form = $this->createForm('AppBundle\Form\SerieType', $serie);
         $form->handleRequest($request);
+        $serie->setAuthor($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
