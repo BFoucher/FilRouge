@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,10 +51,10 @@ class Serie
     private $validated=0;
 
     /**
-    * @var string
-    *
-    * @ORM\OneToMany(targetEntity= "Episode", mappedBy= "serie", cascade={"remove"})
-    */
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity= "Episode", mappedBy= "serie", cascade={"remove"})
+     */
     private $episodes;
 
     /**
@@ -64,18 +65,25 @@ class Serie
     private $picture;
 
     /**
-    * @var string
-    *
-    * @ORM\ManyToOne(targetEntity="Language")
-    */
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Language")
+     */
     private $language;
 
-        /**
-    * @var string
-    *
-    * @ORM\ManyToOne(targetEntity="User",inversedBy="serie")
-    */
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="User",inversedBy="serie")
+     */
     private $author;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="parent", type="integer")
+     */
+    private $parent;
 
     /**
      * Constructor
@@ -287,5 +295,40 @@ class Serie
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    public function setId($id){
+        $this->id = $id;
+    }
+    public function __clone() {
+        $this->id = null;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    /**
+     * Set parent
+     *
+     * @param integer $parent
+     * @return Serie
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return integer 
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

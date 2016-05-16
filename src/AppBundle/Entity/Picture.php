@@ -155,6 +155,13 @@ class Picture
     }
 
     /**
+     * @ORM\PostRemove()
+     */
+    public function postRemove(){
+        unlink($this->getUploadRootDir().'/'.$this->path);
+    }
+
+    /**
      * Get id
      *
      * @return integer

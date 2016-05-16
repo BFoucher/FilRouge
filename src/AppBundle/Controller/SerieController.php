@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Picture;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -84,7 +85,6 @@ class SerieController extends Controller
         $nbSaisons = $em->getRepository('AppBundle:Episode')->countNumberSaison($serieId);
         $deleteForm = $this->createDeleteForm($serie);
 
-        //  dump($nbSaisons);
 
         return $this->render('serie/show.html.twig', array(
             'serie' => $serie,
@@ -102,17 +102,26 @@ class SerieController extends Controller
     public function editAction(Request $request, Serie $serie)
 
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
         $deleteForm = $this->createDeleteForm($serie);
         $editForm = $this->createForm('AppBundle\Form\SerieType', $serie);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($serie);
-            $em->flush();
 
-            return $this->redirectToRoute('serie_edit', array('id' => $serie->getId()));
+            //Create a new serie with parent ref
+            $newSerie = clone $serie;
+            $newSerie->setParent($serie->getId());
+            $newSerie->setValidated(0);
+            $newSerie->setAuthor($this->getUser());
+
+            //Persist only NewSerie for validation
+            $em->detach($serie);
+            $em->persist($newSerie);
+            $em->flush();
+            $this->addFlash('notice', 'La modification à bien été enregistrée, en attente de validation par un modérateur' );
+
+            return $this->redirectToRoute('serie_edit', array('id' => $newSerie->getParent()));
         }
 
         return $this->render('serie/edit.html.twig', array(

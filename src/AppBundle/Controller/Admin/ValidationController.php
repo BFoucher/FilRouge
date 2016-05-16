@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Admin;
 
+use AppBundle\Entity\Picture;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -49,8 +50,20 @@ class ValidationController extends Controller
         if ($type=== 'serie'){
             $serie = $em->getRepository('AppBundle:Serie')->find($id);
             if ($validate==='ok'){
-                $serie->setValidated(true);
-                $em->persist($serie);
+                if ($serie->getParent()>0){
+                    $oldSerie = $em->getRepository('AppBundle:Serie')->find($serie->getParent());
+                    $oldSerie->setDescription($serie->getDescription());
+                    $oldSerie->setName($serie->getName());
+                    $oldSerie->setPicture(new Picture($serie->getPicture()));
+                    $oldSerie->setAuthor($serie->getAuthor());
+                    $oldSerie->setLanguage($serie->getLanguage());
+                    $oldSerie->setThTvdbID($serie->getThTvdbID());
+                    $em->remove($serie);
+                    $em->persist($oldSerie);
+                }else{
+                    $serie->setValidated(true);
+                    $em->persist($serie);
+                }
             }else{
                 $em->remove($serie);
             }

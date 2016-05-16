@@ -18,6 +18,11 @@
 {{ form_start(edit_form) }}
     {{ form_errors(edit_form) }}
     <div >
+        {% for flash_message in app.session.flashBag.get('notice') %}
+            <div class="alert alert-info">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
         <div class= "form-text">
             {{ form_label(edit_form.name) }}
         </div>
@@ -33,38 +38,13 @@
     </div>
     <div>
         <div class= "form-text">
-            {{ form_label(edit_form.thTvdbID) }}
-        </div>
-            {{ form_errors(edit_form.thTvdbID) }}
-            {{ form_widget(edit_form.thTvdbID) }}
-    </div>
-    <div>
-        <div class= "form-text">
-            {{ form_label(edit_form.validated) }}
-        </div>
-            {{ form_errors(edit_form.validated) }}
-            {{ form_widget(edit_form.validated) }}
-    </div>
-    <div>
-        <div class= "form-text">
             {{ form_label(edit_form.picture) }}
+        </div>
+        <div>
+            <img src="{{ asset(serie.picture) }}" alt="Affiche de la Serie">
         </div>
             {{ form_errors(edit_form.picture) }}
             {{ form_widget(edit_form.picture) }}
-    </div>
-    <div>
-        <div class= "form-text">
-            {{ form_label(edit_form.language) }}
-        </div>
-            {{ form_errors(edit_form.language) }}
-            {{ form_widget(edit_form.language) }}
-    </div>
-    <div>
-        <div class= "form-text">
-            {{ form_label(edit_form.author) }}
-        </div>
-            {{ form_errors(edit_form.author) }}
-            {{ form_widget(edit_form.author) }}
     </div>
     <div class ="back">
     <input type="submit" class="btn btn-primary" value="Editer" />
