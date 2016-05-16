@@ -263,9 +263,9 @@ class User extends BaseUser
      */
     public function getAvatar()
     {
-        //TODO: remove when upload avatar work
+        // Return an default Picture if not defined
         if ($this->avatar === null){
-            return 'imgs/default_avatar.png';
+            return new Picture('imgs/default_avatar.png');
         }
         return $this->avatar;
     }

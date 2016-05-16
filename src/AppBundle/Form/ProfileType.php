@@ -12,7 +12,7 @@ class ProfileType extends AbstractType
         $builder//->add('firstName')
             //->add('lastName')
             //->add('birth', 'date')
-            ->add('avatar')
+            ->add('avatar',new PictureType())
             ->remove('username')
         ;
     }

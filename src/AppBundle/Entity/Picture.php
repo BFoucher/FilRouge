@@ -30,6 +30,7 @@ class Picture
 
     /**
      * @Assert\File(maxSize="6000000")
+     * @Assert\Image(mimeTypesMessage="Please upload a valid image.")
      */
     private $file;
 
@@ -213,5 +214,10 @@ class Picture
 
     public function getUrl(){
         return $this->getWebPath();
+    }
+
+    public function __toString()
+    {
+        return $this->getUrl();
     }
 }
