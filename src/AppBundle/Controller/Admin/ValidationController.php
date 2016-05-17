@@ -72,8 +72,20 @@ class ValidationController extends Controller
         }elseif ($type=== 'episode'){
             $episode = $em->getRepository('AppBundle:Episode')->find($id);
             if ($validate==='ok'){
-                $episode->setValidated(true);
-                $em->persist($episode);
+                if ($episode->getParent()>0){
+                    $oldEpisode = $em->getRepository('AppBundle:Episode')->find($episode->getParent());
+                    $oldEpisode->setDescription($episode->getDescription());
+                    $oldEpisode->setName($episode->getName());
+                    $oldEpisode->setAuthor($episode->getAuthor());
+                    $oldEpisode->setLanguage($episode->getLanguage());
+                    $oldEpisode->setEpisodeNumber($episode->getEpisodeNumber());
+                    $oldEpisode->setSaison($episode->getSaison());
+                    $em->remove($episode);
+                    $em->persist($oldEpisode);
+                }else{
+                    $episode->setValidated(true);
+                    $em->persist($episode);
+                }
             }else{
                 $em->remove($episode);
             }

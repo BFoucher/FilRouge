@@ -78,6 +78,13 @@ class Episode
     private $author;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="parent", type="integer")
+     */
+    private $parent=0;
+
+    /**
      * Get id
      *
      * @return integer
@@ -274,5 +281,36 @@ class Episode
     public function getEpisodeNumber()
     {
         return $this->episodeNumber;
+    }
+
+    public function setId($id){
+        $this->id = $id;
+    }
+    public function __clone() {
+        $this->id = null;
+    }
+
+
+    /**
+     * Set parent
+     *
+     * @param integer $parent
+     * @return Serie
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return integer
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

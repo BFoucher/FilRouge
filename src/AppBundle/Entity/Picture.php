@@ -155,6 +155,7 @@ class Picture
     }
 
     /**
+     * Delete File after delete Entity
      * @ORM\PostRemove()
      */
     public function postRemove(){

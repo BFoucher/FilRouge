@@ -19,22 +19,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  */
 class EpisodeController extends Controller
 {
-    /**
-     * Lists all Episode entities.
-     *
-     * @Route("/", name="episode_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $episodes = $em->getRepository('AppBundle:Episode')->getAll();
-
-        return $this->render('episode/index.html.twig', array(
-            'episodes' => $episodes,
-        ));
-    }
 
     /**
      * Creates a new Episode entity.
@@ -66,21 +50,6 @@ class EpisodeController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a Episode entity.
-     *
-     * @Route("/{id}", name="episode_show")
-     * @Method("GET")
-     */
-    public function showAction(Episode $episode)
-    {
-        $deleteForm = $this->createDeleteForm($episode);
-
-        return $this->render('episode/show.html.twig', array(
-            'episode' => $episode,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
 
     /**
      * Displays a form to edit an existing Episode entity.
@@ -96,10 +65,20 @@ class EpisodeController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($episode);
-            $em->flush();
 
-            return $this->redirectToRoute('serie_show', array('serieId' => $episode->getSerie()->getId()));
+            //Create a new episode with parent ref
+            $newEpisode = clone $episode;
+            $newEpisode->setParent($episode->getId());
+            $newEpisode->setValidated(0);
+            $newEpisode->setAuthor($this->getUser());
+
+            //Persist only NewEpisode for validation
+            $em->detach($episode);
+            $em->persist($newEpisode);
+            $em->flush();
+            $this->addFlash('notice', 'La modification à bien été enregistrée, en attente de validation par un modérateur' );
+
+            return $this->redirectToRoute('episode_edit', array('id' => $episode->getId()));
         }
 
         return $this->render('episode/edit.html.twig', array(
@@ -127,7 +106,7 @@ class EpisodeController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('serie_show');
+        return $this->redirectToRoute('serie_index');
     }
 
     /**

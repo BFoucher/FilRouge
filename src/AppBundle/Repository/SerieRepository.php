@@ -48,6 +48,7 @@ class SerieRepository extends EntityRepository
     }
 
     public function getOneWithEpisodes($serieId){
+        //TODO: No check episode validation, no result when no episode...
         $query = $this->createQueryBuilder('serie')
             ->select('serie')
             ->leftjoin('serie.episodes','episode')
@@ -61,6 +62,7 @@ class SerieRepository extends EntityRepository
             ->orderBy('episode.saison,episode.episodeNumber')
             ->setParameter('id', $serieId)
             ->setParameter(':is_validated',true)
+
             ->getQuery();
 
         return $query->getSingleResult();

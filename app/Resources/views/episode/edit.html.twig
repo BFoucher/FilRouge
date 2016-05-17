@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Episode modification</h1>
+    {% for flash_message in app.session.flashBag.get('notice') %}
+        <div class="alert alert-info">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+    {{ form_start(edit_form) }}
+    {{ form_widget(edit_form) }}
+    <input type="submit" value="Modifier" />
+    {{ form_end(edit_form) }}
+
+    {%  if is_granted('ROLE_MODERATOR') %}
+    <ul>
+        <li>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+    {% endif %}
+{% endblock %}
