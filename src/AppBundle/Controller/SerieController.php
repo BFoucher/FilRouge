@@ -108,10 +108,10 @@ class SerieController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-
             //Create a new serie with parent ref
             $newSerie = clone $serie;
             $newSerie->setParent($serie->getId());
+            $newSerie->setPicture(new Picture($serie->getPicture()->getAbsolutePath()));
             $newSerie->setValidated(0);
             $newSerie->setAuthor($this->getUser());
 

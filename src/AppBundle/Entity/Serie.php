@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Form\PictureType;
 use Doctrine\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -302,6 +303,7 @@ class Serie
     }
     public function __clone() {
         $this->id = null;
+        $this->episodes = null;
     }
 
     public function __toString()
