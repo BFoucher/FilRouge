@@ -1,7 +1,7 @@
 function displayMessage(data){
     var htmlCraCra = '<li class="left clearfix">'+
         '<span class="chat-img pull-left">'+
-        '<a href="/user/'+data.author.id+'"><img src="'+data.author.avatar+'+" alt="User Avatar" class="img-circle avatar" /></a>'+
+        '<a href="/user/'+data.author.id+'"><img src="'+data.author.avatar+'" alt="User Avatar" class="img-circle avatar" /></a>'+
         '</span>'+
         '<div class="chat-body clearfix">'+
         '<div class="header">'+
