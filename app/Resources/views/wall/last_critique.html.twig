@@ -1,31 +1,33 @@
 <div class="carousel slide" data-ride="carousel" role="listbox">
     <div class="carousel-inner">
         {% for comment in lastComments %}
-        <div class="item  {% if loop.first %}active{% endif %}">
-            <div class="testimonials">
-                <div class="active item">
-                    <blockquote><p>{{ comment.body }}</p></blockquote>
-                    <div class="carousel-info">
-                        <div class="col-sm-6">
-                            {%   set commentSerie = helpSerie.getThisSerie({'id':comment.thread.id}) %}
-                            <img alt="" src="{{ asset(comment.author.avatar) }}" class="pull-left">
-                            <div class="pull-left">
-                                <span class="testimonials-name">{{ comment.author.username }}</span>
-                                <span class="testimonials-post">{{ comment.createdAt|date('d/m h:i') }}</span>
+            <div class="item  {% if loop.first %}active{% endif %}">
+                <div class="testimonials">
+                    <div class="active item">
+                        <blockquote><p>{{ comment.body }}</p></blockquote>
+                        <div class="carousel-info">
+                            <div class="col-sm-6">
+                                {%   set commentSerie = helpSerie.getThisSerie({'id':comment.thread.id}) %}
+                                <a href="{{ path('user_profile',{'user':comment.author.id}) }}">
+                                    <img alt="" src="{{ asset(comment.author.avatar) }}" class="pull-left">
+                                </a>
+                                <div class="pull-left">
+                                    <span class="testimonials-name"><a href="{{ path('user_profile',{'user':comment.author.id}) }}">{{ comment.author.username }}</a></span>
+                                    <span class="testimonials-post">{{ comment.createdAt|date('d/m h:i') }}</span>
+                                </div>
                             </div>
+                            <a href="{{ path('serie_show',{'serieId':comment.thread.id}) }}">
+                                <div class="col-sm-6">
+                                    <img alt="{{ commentSerie.name }}" src="{{ asset(commentSerie.picture.url) }}" class="pull-right">
+                                    <div class="pull-right">
+                                        <p class="testimonials-name">{{commentSerie.name }}</p>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                        <a href="{{ path('serie_show',{'serieId':comment.thread.id}) }}">
-                        <div class="col-sm-6">
-                                <img alt="{{ commentSerie.name }}" src="{{ asset(commentSerie.picture.url) }}" class="pull-right">
-                            <div class="pull-right">
-                                <p class="testimonials-name">{{commentSerie.name }}</p>
-                            </div>
-                        </div>
-                        </a>
                     </div>
                 </div>
             </div>
-        </div>
         {% endfor %}
     </div>
 </div>

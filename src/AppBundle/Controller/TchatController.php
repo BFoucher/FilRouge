@@ -78,6 +78,7 @@ class TchatController extends Controller
                 'message' => htmlentities($message->getMessage()),
                 'author' => array(
                     'username' => $user->getUsername(),
+                    'id' => $user->getId(),
                     'avatar' => $user->getAvatar())
             );
 
