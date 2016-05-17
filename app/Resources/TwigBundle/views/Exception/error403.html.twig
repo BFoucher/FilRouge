@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="block text-center">
+    <h1 ><strong>!!! 403 FORBIDDEN !!!</strong></h1></div>
+    <div class="text-center">
+        <img src="{{ asset('imgs/403.jpg') }}" alt="little pony"/>
+    </div>
+    <div class="block text-center">
+        <h2>Mais non ! mais non tu n'as pas le droit de faire ça !</h2>
+        <h2><a href="{{ path('homepage') }}">Retourne tout de suite de là où tu viens !</a></h2>
+    </div>
+{% endblock %}
