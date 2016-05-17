@@ -1,7 +1,7 @@
 /*FONT*/
 @font-face {
     font-family: intro;
-    src: url(fonts/Intro.otf);
+    src: url(../fonts/Intro.otf);
 }
 html{
     font-family: intro;
@@ -79,3 +79,7 @@ input[id="submit"] {
     font-family: FontAwesome;
     font-size: 1em;
 }
+
+.panel-title{
+    font-family: intro;
+    font-size: 1.2em;}
