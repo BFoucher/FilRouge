@@ -12,7 +12,7 @@ use AppBundle\Form\AdminUserType;
 /**
  * Class DefaultController
  * @Route("/admin/users")
- * @Security("has_role('ROLE_ADMIN')")
+ * @Security("has_role('ROLE_MODERATOR')")
  */
 class UserController extends Controller
 {
@@ -28,9 +28,26 @@ class UserController extends Controller
             'users' => $users
         ]);
     }
+    /**
+     * @Route("/{user}/ban", name="admin_users_ban")
+     * @Security("has_role('ROLE_MODERATOR')")
+     */
+    public function banAction(Request $request,User $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if ($user->isEnabled()) {
+            $user->setEnabled(0);
+        }else{
+            $user->setEnabled(1);
+        }
+        $em->persist($user);
+        $em->flush();
 
+        return $this->redirectToRoute('user_profile',['user'=>($user->getId())]);
+    }
     /**
      * @Route("/{user}", name="admin_users_edit")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editAction(Request $request,User $user)
     {
@@ -48,20 +65,5 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/{user}/ban", name="admin_users_ban")
-     */
-    public function banAction(Request $request,User $user)
-    {
-        $em = $this->getDoctrine()->getManager();
-        if ($user->isEnabled()) {
-            $user->setEnabled(0);
-        }else{
-            $user->setEnabled(1);
-        }
-        $em->persist($user);
-        $em->flush();
 
-        return $this->redirectToRoute('admin_users_edit',['user'=>($user->getId())]);
-    }
 }

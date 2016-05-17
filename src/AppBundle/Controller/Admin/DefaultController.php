@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class DefaultController
  * @Route("/admin")
- * @Security("has_role('ROLE_ADMIN')")
+ * @Security("has_role('ROLE_MODERATOR')")
  */
 class DefaultController extends Controller
 {
