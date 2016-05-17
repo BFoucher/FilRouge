@@ -20,12 +20,6 @@
             <div class="item active overlay">
                <img src="{{ asset(user.avatar) }}" alt="{{ user.username }}" />
             </div>
-
-            <div class="item item-text overlay">
-               <h3 class="tilecaption biggest text-center"><strong>{{ user.watch|length }}</strong></h3>
-                <p class="text-center">Episodes Vus</p>
-            </div>
-
           </div>
         </div>
 
@@ -38,35 +32,6 @@
 
 {% block stylesheets %}
     <style>
-        .dynamicTile{
-            padding:5px;
-        }
-        .tile{
-            margin: 5px;
-            z-index: 1;
-        }
-        .item-text{
-            padding-top: 30px;
-            font-weight: 900;
-        }
-        .overlay{
-            position:absolute;
-            background-color: #f6f6f6;
-            opacity: 0.7;
-        }
-        @media (max-device-width: 640px){
-            .item-text{
-                padding-top: 0px;
-                font-weight: 400;
-                font-size: 0.8em;
-            }
-        }
-        {%   for user in users %}
-            #tile{{ loop.index }}{
-                background-image: url('{{ asset(user.avatar) }}');
-                background-size: cover;
-            }
-        {%  endfor %}
         .username{
             position:absolute;
             bottom: 0px;
@@ -79,32 +44,4 @@
             opacity: 0.5;
         }
     </style>
-{% endblock %}
-
-
-
-{% block javascripts %}
-    <script>
-        $( document ).ready(function() {
-            $(".tile").height($("#tile1").width());
-            $(".carousel").height($("#tile1").width());
-            $(".item").height($("#tile1").width());
-
-            $(window).resize(function() {
-                if(this.resizeTO) clearTimeout(this.resizeTO);
-                this.resizeTO = setTimeout(function() {
-                    $(this).trigger('resizeEnd');
-                }, 10);
-            });
-
-            $(window).bind('resizeEnd', function() {
-                $(".tile").height($("#tile1").width());
-                $(".carousel").height($("#tile1").width());
-                $(".item").height($("#tile1").width());
-            });
-
-        });
-
-
-    </script>
 {% endblock %}
