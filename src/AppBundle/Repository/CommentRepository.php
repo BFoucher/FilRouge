@@ -22,4 +22,13 @@ class CommentRepository extends EntityRepository
 
         return $query->getResult();
     }
+
+    public function countCommentsByUser($userId){
+        $query = $this->createQueryBuilder('c')
+            ->select('COUNT(c)')
+            ->where('c.author = :userId')
+            ->setParameter(':userId', $userId)
+            ->getQuery();
+        return $query->getSingleScalarResult();
+    }
 }

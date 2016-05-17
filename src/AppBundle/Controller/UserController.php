@@ -37,8 +37,13 @@ class UserController extends Controller
      */
     public function showProfileAction(User $user)
     {
+        $em = $this->getDoctrine()->getManager();
+        $nbComments = $em->getRepository('AppBundle:Comment')->countCommentsByUser($user->getId());
+        $nbVotes = $em->getRepository('AppBundle:VoteComment')->countVotesByUser($user->getId());
         return $this->render('user/profile.html.twig', array(
             'user' => $user,
+            'comments' =>$nbComments,
+            'votes' =>$nbVotes
         ));
     }
 

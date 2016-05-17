@@ -8,7 +8,7 @@ use FOS\CommentBundle\Model\SignedVoteInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\VoteRepository")
  * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  */
 class VoteComment extends BaseVote implements SignedVoteInterface
