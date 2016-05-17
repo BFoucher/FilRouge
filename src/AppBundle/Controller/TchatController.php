@@ -81,7 +81,6 @@ class TchatController extends Controller
                     'id' => $user->getId(),
                     'avatar' => $user->getAvatar()->getUrl())
             );
-            dump($responseMessage);
 
             //Todo: serialiser l'object message avance de l'envoyer à Redis...
             $response = new JsonResponse();
