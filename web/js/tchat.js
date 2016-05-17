@@ -23,15 +23,15 @@ $(document).ready(function(){
     // Listening on notification from server{
 
     // Getting socket
-    /*
-    var socket = io('http://127.0.0.1:8081');
+
+    var socket = io('http://node.bfoucher.fr');
 
     socket.on('notification', function (data) {
         data = $.parseJSON(data);
         displayMessage(data);
 
     });
-    */
+
     // Listener on form submit event
     $(document).on('submit', '.form-tchat', function(e) {
         e.preventDefault();
