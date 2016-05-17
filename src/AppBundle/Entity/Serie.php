@@ -83,7 +83,7 @@ class Serie
      *
      * @ORM\Column(name="parent", type="integer")
      */
-    private $parent;
+    private $parent=0;
 
     /**
      * Constructor
